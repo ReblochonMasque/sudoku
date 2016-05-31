@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 """
 boardkeys.py
-A general sudoku solver
+Sudoku board representation - keys and addresses
 Created on Mon May 30 17:00:20 2016
 @author: fredericdupont
 """
 
+import math
+
 class Board(object):
     """
     represents a sudoku board with rows in CAPITAL and cols in lower case, and
-    provides the necessary data structures and access keys to manipulate it
+    provides the data structures and access keys to manipulate it
         for a 9x9 board:
             --> rows are A to I
             --> cols are a to i
@@ -28,10 +30,10 @@ class Board(object):
     H  Ha Hb Hc | Hd He Hf | Hg Hh Hi
     I  Ia Ib Ic | Id Ie If | Ig Ih Ii
 
-    
+
     Units are the lists of squares representing the ROW, COL and BOX of a SQUARE
     Units of Ce (3 lists of 9 = 27)
-                   ROW                             BOX                             COL     
+                   ROW                             BOX                             COL
        a  b  c    d  e  f    g  h  i   a  b  c    d  e  f    g  h  i   a  b  c    d  e  f    g  h  i
     A           |          |                    | Ad Ae Af |                    |    Ae    |
     B           |          |                    | Bd Be Bf |                    |    Be    |
@@ -69,6 +71,7 @@ class Board(object):
         """
         assert size == 9
         self._size = size
+        self._size_root = math.sqrt(self._size)
         self._rows = [chr(ord('A')+_) for _ in range(self._size)]
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
         self._squares = Board._cross(self._rows, self._cols)
@@ -76,9 +79,9 @@ class Board(object):
                          [Board._cross(row, self._cols) for row in self._rows] +\
                          [Board._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
                           for col in ('abc', 'def', 'ghi')]
-        self._units = {square:[unit for unit in self._unitlist if square in unit]
+        self._units = {square: [unit for unit in self._unitlist if square in unit]
                        for square in self._squares}
-        self._peers = {square:set(sum(self._units[square], [])) - set([square])
+        self._peers = {square: set(sum(self._units[square], [])) - set([square])
                        for square in self._squares}
 #        print(self._rows)
 #        print(self._cols)
@@ -88,7 +91,6 @@ class Board(object):
 #        print(self._units)
 #        print(self._peers)
 
-
     @staticmethod
     def _cross(seq_a, seq_b):
         """returns a list containing the cross products of elts in seq_a
@@ -96,22 +98,43 @@ class Board(object):
         """
         return [a+b for a in seq_a for b in seq_b]
 
+    def output(self, coll):
+        """pretty prints a collection of square keys
+        """
+        result = ['   '] + [col + '    '
+                 if not (idx + 1) % self._size_root and (idx + 1) % self._size
+                 else col + '  '
+                 for idx, col in enumerate(self._cols)] + ['\n']
 
-#class Solver(object):
-#    """
-#    attempts to solve a sudoku board
-#    """
-#    pass
-#
-#
-#class Strategies(Solver):
-#    """
-#    implements various solving strategies
-#    """
-#    pass
+        for idx, square in enumerate(self._squares):
+            if square in coll:
+                elt = square
+            else:
+                elt = '. '
+
+            if not idx % self._size:
+                result.append(self._rows[idx // self._size] + '  ')
+            result.append(elt + ' ')
+
+            if not (idx + 1) % self._size_root and (idx + 1) % self._size:
+                result += '| '
+
+            if not (idx + 1) % self._size:
+                result.append('\n')
+
+            if not (idx + 1) % (self._size * self._size_root) and idx < self._size**2 - self._size:
+                result.append('   ---------+----------+----------\n')
+
+        result.append('\n')
+        return ''.join(result)
 
 
 
 if __name__ == '__main__':
 
-    Board()
+    board = Board()
+    print(board.output(board._squares))
+    for key in board._squares[72:]:
+        print(board.output(board._peers[key]))
+    print(board.output(board._peers['Bd']))
+

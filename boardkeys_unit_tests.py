@@ -31,29 +31,29 @@ class Test_Board(unittest.TestCase):
                                  'Ga', 'Gb', 'Gc', 'Gd', 'Ge', 'Gf', 'Gg', 'Gh', 'Gi', \
                                  'Ha', 'Hb', 'Hc', 'Hd', 'He', 'Hf', 'Hg', 'Hh', 'Hi', \
                                  'Ia', 'Ib', 'Ic', 'Id', 'Ie', 'If', 'Ig', 'Ih', 'Ii']
-        
+
     def test_an_object_Board_is_created(self):
         board_1 = Board()
-        self.assertIsInstance(board_1, Board)  
+        self.assertIsInstance(board_1, Board)
         board_2 = Board(9)
         self.assertIsInstance(board_2, Board)
         self.assertIsInstance(self.board1, Board)
         self.assertIsInstance(self.board2, Board)
-        
+
     def test_ROWS(self):
         """do ROWS contain the proper values
         """
         rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
         self.assertEqual(self.board1._rows, rows)
         self.assertEqual(self.board2._rows, rows)
-        
+
     def test_COLS(self):
         """do COLS contain the proper values
         """
         cols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
         self.assertEqual(self.board1._cols, cols)
         self.assertEqual(self.board1._cols, cols)
-        
+
     def test_SQUARES(self):
         """do SQUARES contain the proper values
         """
@@ -144,7 +144,7 @@ class Test_Board(unittest.TestCase):
                  'Ia': [['Aa', 'Ba', 'Ca', 'Da', 'Ea', 'Fa', 'Ga', 'Ha', 'Ia'], ['Ia', 'Ib', 'Ic', 'Id', 'Ie', 'If', 'Ig', 'Ih', 'Ii'], ['Ga', 'Gb', 'Gc', 'Ha', 'Hb', 'Hc', 'Ia', 'Ib', 'Ic']],\
                  'Hg': [['Ag', 'Bg', 'Cg', 'Dg', 'Eg', 'Fg', 'Gg', 'Hg', 'Ig'], ['Ha', 'Hb', 'Hc', 'Hd', 'He', 'Hf', 'Hg', 'Hh', 'Hi'], ['Gg', 'Gh', 'Gi', 'Hg', 'Hh', 'Hi', 'Ig', 'Ih', 'Ii']],\
                  'Ae': [['Ae', 'Be', 'Ce', 'De', 'Ee', 'Fe', 'Ge', 'He', 'Ie'], ['Aa', 'Ab', 'Ac', 'Ad', 'Ae', 'Af', 'Ag', 'Ah', 'Ai'], ['Ad', 'Ae', 'Af', 'Bd', 'Be', 'Bf', 'Cd', 'Ce', 'Cf']]}
-        
+
         for key in self.square_reference:
             self.assertEqual(self.board1._units[key], units[key])
             self.assertEqual(self.board2._units[key], units[key])
@@ -246,8 +246,26 @@ class Test_Board(unittest.TestCase):
         self.assertEqual(key_set, key_set_reference)
         key_set = set(self.board2._peers.keys())
         self.assertEqual(key_set, key_set_reference)
-        
-        
+
+    def testprinted_output(self):
+        """
+        compares the printed output to a reference string
+        """
+        reference_string = """   a  b  c    d  e  f    g  h  i  \n\
+A  Aa Ab Ac | Ad Ae Af | Ag Ah Ai \n\
+B  Ba Bb Bc | Bd Be Bf | Bg Bh Bi \n\
+C  Ca Cb Cc | Cd Ce Cf | Cg Ch Ci \n\
+   ---------+----------+----------\n\
+D  Da Db Dc | Dd De Df | Dg Dh Di \n\
+E  Ea Eb Ec | Ed Ee Ef | Eg Eh Ei \n\
+F  Fa Fb Fc | Fd Fe Ff | Fg Fh Fi \n\
+   ---------+----------+----------\n\
+G  Ga Gb Gc | Gd Ge Gf | Gg Gh Gi \n\
+H  Ha Hb Hc | Hd He Hf | Hg Hh Hi \n\
+I  Ia Ib Ic | Id Ie If | Ig Ih Ii \n\n"""
+        result = self.board1.output(self.board1._squares)
+        self.assertEqual(result, reference_string)
+
 #    def test_various_board_sizes(self):
 #        """Not implemented - must revert to a 9x9 board
 #        """
