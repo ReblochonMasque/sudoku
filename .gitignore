@@ -1,2 +1,9 @@
 # spyder app workspace config file
 .spyderworkspace
+
+# zold folder containing tries and errors
+zold/
+
+# __pycache__/ containing .pyc files & .pyc files
+__pycache__/
+*.pyc
