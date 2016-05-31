@@ -102,9 +102,9 @@ class Board(object):
         """pretty prints a collection of square keys
         """
         result = ['   '] + [col + '    '
-                 if not (idx + 1) % self._size_root and (idx + 1) % self._size
-                 else col + '  '
-                 for idx, col in enumerate(self._cols)] + ['\n']
+                            if not (idx + 1) % self._size_root and (idx + 1) % self._size
+                            else col + '  '
+                            for idx, col in enumerate(self._cols)] + ['\n']
 
         for idx, square in enumerate(self._squares):
             if square in coll:
@@ -123,7 +123,7 @@ class Board(object):
                 result.append('\n')
 
             if not (idx + 1) % (self._size * self._size_root) and idx < self._size**2 - self._size:
-                result.append('   ---------+----------+----------\n')
+                result.append('   ---------+----------+--------- \n')
 
         result.append('\n')
         return ''.join(result)

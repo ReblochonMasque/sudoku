@@ -255,11 +255,11 @@ class Test_Board(unittest.TestCase):
 A  Aa Ab Ac | Ad Ae Af | Ag Ah Ai \n\
 B  Ba Bb Bc | Bd Be Bf | Bg Bh Bi \n\
 C  Ca Cb Cc | Cd Ce Cf | Cg Ch Ci \n\
-   ---------+----------+----------\n\
+   ---------+----------+--------- \n\
 D  Da Db Dc | Dd De Df | Dg Dh Di \n\
 E  Ea Eb Ec | Ed Ee Ef | Eg Eh Ei \n\
 F  Fa Fb Fc | Fd Fe Ff | Fg Fh Fi \n\
-   ---------+----------+----------\n\
+   ---------+----------+--------- \n\
 G  Ga Gb Gc | Gd Ge Gf | Gg Gh Gi \n\
 H  Ha Hb Hc | Hd He Hf | Hg Hh Hi \n\
 I  Ia Ib Ic | Id Ie If | Ig Ih Ii \n\n"""
