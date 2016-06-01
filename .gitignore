@@ -7,3 +7,6 @@ zold/
 # __pycache__/ containing .pyc files & .pyc files
 __pycache__/
 *.pyc
+
+# .coverage
+.coverage
