@@ -68,6 +68,7 @@ class Board(object):
         """
         various sizes not handled
         @todo: implement different sizes sudoku boards (16/25/36/49/64/81/100)
+        @todo: REFACTOR -> why @property getters don't work?
         """
         assert size == 9
         self._size = size
@@ -75,10 +76,12 @@ class Board(object):
         self._rows = [chr(ord('A')+_) for _ in range(self._size)]
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
         self._squares = Board._cross(self._rows, self._cols)
+
         self._unitlist = [Board._cross(self._rows, col) for col in self._cols] +\
                          [Board._cross(row, self._cols) for row in self._rows] +\
                          [Board._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
                           for col in ('abc', 'def', 'ghi')]
+
         self._units = {square: [unit for unit in self._unitlist if square in unit]
                        for square in self._squares}
         self._peers = {square: set(sum(self._units[square], [])) - set([square])
@@ -90,6 +93,19 @@ class Board(object):
 #        [print(unit, end=' ') for unit in self._unitlist]
 #        print(self._units)
 #        print(self._peers)
+
+#        @property
+#        def squares(self):
+#            return self._squares
+#
+#        @property
+#        def units(self):
+#            return self._units
+#
+#        @property
+#        def peers(self):
+#            return self._peers
+
 
     @staticmethod
     def _cross(seq_a, seq_b):
@@ -128,13 +144,18 @@ class Board(object):
         result.append('\n')
         return ''.join(result)
 
+# REFACTOR private attribute access
+board = Board()
+SQUARES = board._squares    # an ordered list of the squares
+UNITS = board._units        # a dictionary with a square as key
+PEERS = board._peers        # a dictionary with a square as key
 
 
 if __name__ == '__main__':
 
     board = Board()
-    print(board.output(board._squares))
-    for key in board._squares[72:]:
+    #print(board.output(board._squares))
+    for key in board._squares[65:]:
         print(board.output(board._peers[key]))
-    print(board.output(board._peers['Bd']))
+    #print(board.output(board._peers['Bd']))
 
