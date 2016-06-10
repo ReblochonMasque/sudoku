@@ -1,5 +1,6 @@
-# spyder app workspace config file
+# IDE workspace config
 .spyderworkspace
+.idea/
 
 # zold folder containing tries and errors
 zold/
