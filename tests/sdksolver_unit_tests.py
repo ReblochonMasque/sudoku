@@ -11,8 +11,8 @@ Created on Wed Jun  1 15:30:52 2016
 import unittest
 from sdksolver import SDKSolver
 
-class Test_SDKSolver(unittest.TestCase):
 
+class TestSDKSolver(unittest.TestCase):
 
     def setUp(self):
         pass
