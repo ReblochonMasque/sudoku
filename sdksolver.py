@@ -7,10 +7,7 @@ Created on Wed Jun  1 15:27:23 2016
 @author: fredericdupont
 """
 
-from boardkeys import SQUARES, UNITS, PEERS
-
-# @todo: move DIGITS constant to boardkeys.py
-DIGITS = '123456789'
+from boardkeys import SQUARES, UNITS, PEERS, DIGITS
 
 
 class SDKSolver(object):
@@ -37,7 +34,6 @@ def make_grid_from_string(values):
     chars = [char for char in values if char in DIGITS or char in '0.']
     assert len(chars) == 81
     return {key: value for key, value in zip(SQUARES, chars)}
-
 
 
 if __name__ == '__main__':
