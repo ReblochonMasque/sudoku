@@ -10,7 +10,7 @@ Created on Mon May 30 17:01:26 2016
 """
 
 import unittest
-from boardkeys import Board
+from boardkeys import _BoardConstants
 
 
 class TestBoard(unittest.TestCase):
@@ -19,8 +19,8 @@ class TestBoard(unittest.TestCase):
         """
         Boards of size=9: board1, board2
         """
-        self.board1 = Board()
-        self.board2 = Board(9)
+        self.board1 = _BoardConstants()
+        self.board2 = _BoardConstants(9)
         self.square_reference = ['Aa', 'Ab', 'Ac', 'Ad', 'Ae', 'Af', 'Ag', 'Ah', 'Ai',
                                  'Ba', 'Bb', 'Bc', 'Bd', 'Be', 'Bf', 'Bg', 'Bh', 'Bi',
                                  'Ca', 'Cb', 'Cc', 'Cd', 'Ce', 'Cf', 'Cg', 'Ch', 'Ci',
@@ -32,12 +32,12 @@ class TestBoard(unittest.TestCase):
                                  'Ia', 'Ib', 'Ic', 'Id', 'Ie', 'If', 'Ig', 'Ih', 'Ii']
 
     def test_an_object_Board_is_created(self):
-        board_1 = Board()
-        self.assertIsInstance(board_1, Board)
-        board_2 = Board(9)
-        self.assertIsInstance(board_2, Board)
-        self.assertIsInstance(self.board1, Board)
-        self.assertIsInstance(self.board2, Board)
+        board_1 = _BoardConstants()
+        self.assertIsInstance(board_1, _BoardConstants)
+        board_2 = _BoardConstants(9)
+        self.assertIsInstance(board_2, _BoardConstants)
+        self.assertIsInstance(self.board1, _BoardConstants)
+        self.assertIsInstance(self.board2, _BoardConstants)
 
     def test_ROWS(self):
         """do ROWS contain the proper values
@@ -61,6 +61,9 @@ class TestBoard(unittest.TestCase):
 
     def test_UNITS(self):
         """do UNITS contain the proper values
+        'Hd': [['Ad', 'Bd', 'Cd', 'Dd', 'Ed', 'Fd', 'Gd', 'Hd', 'Id'],     # Lines
+               ['Ha', 'Hb', 'Hc', 'Hd', 'He', 'Hf', 'Hg', 'Hh', 'Hi'],     # Columns
+               ['Gd', 'Ge', 'Gf', 'Hd', 'He', 'Hf', 'Id', 'Ie', 'If']],    # Boxes
         """
         units = {'Hd': [['Ad', 'Bd', 'Cd', 'Dd', 'Ed', 'Fd', 'Gd', 'Hd', 'Id'], ['Ha', 'Hb', 'Hc', 'Hd', 'He', 'Hf', 'Hg', 'Hh', 'Hi'], ['Gd', 'Ge', 'Gf', 'Hd', 'He', 'Hf', 'Id', 'Ie', 'If']],
                  'Ge': [['Ae', 'Be', 'Ce', 'De', 'Ee', 'Fe', 'Ge', 'He', 'Ie'], ['Ga', 'Gb', 'Gc', 'Gd', 'Ge', 'Gf', 'Gg', 'Gh', 'Gi'], ['Gd', 'Ge', 'Gf', 'Hd', 'He', 'Hf', 'Id', 'Ie', 'If']],
@@ -268,8 +271,8 @@ I  Ia Ib Ic | Id Ie If | Ig Ih Ii \n\n"""
 #    def test_various_board_sizes(self):
 #        """Not implemented - must revert to a 9x9 board
 #        """
-#        board = Board(16)
-#        self.assertIsInstance(board, Board)
+#        board = _BoardConstants(16)
+#        self.assertIsInstance(board, _BoardConstants)
 
 
 if __name__ == '__main__':
