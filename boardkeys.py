@@ -8,7 +8,8 @@ Created on Mon May 30 17:00:20 2016
 
 import math
 
-class Board(object):
+
+class _BoardConstants(object):
     """
     represents a sudoku board with rows in CAPITAL and cols in lower case, and
     provides the data structures and access keys to manipulate it
@@ -16,7 +17,7 @@ class Board(object):
             --> rows are A to I
             --> cols are a to i
 
-    Board repr:
+    _BoardConstants repr:
        a  b  c    d  e  f    g  h  i
     A  Aa Ab Ac | Ad Ae Af | Ag Ah Ai
     B  Ba Bb Bc | Bd Be Bf | Bg Bh Bi
@@ -64,6 +65,7 @@ class Board(object):
     I           |    Ie    |
 
     """
+
     def __init__(self, size=9):
         """
         various sizes not handled
@@ -72,20 +74,22 @@ class Board(object):
         """
         assert size == 9
         self._size = size
+        self._digits = ''.join([str(idx) for idx in range(1, 10)])
         self._size_root = math.sqrt(self._size)
         self._rows = [chr(ord('A')+_) for _ in range(self._size)]
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
-        self._squares = Board._cross(self._rows, self._cols)
+        self._squares = _BoardConstants._cross(self._rows, self._cols)
 
-        self._unitlist = [Board._cross(self._rows, col) for col in self._cols] +\
-                         [Board._cross(row, self._cols) for row in self._rows] +\
-                         [Board._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
+        self._unitlist = [_BoardConstants._cross(self._rows, col) for col in self._cols] + \
+                         [_BoardConstants._cross(row, self._cols) for row in self._rows] + \
+                         [_BoardConstants._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
                           for col in ('abc', 'def', 'ghi')]
 
         self._units = {square: [unit for unit in self._unitlist if square in unit]
                        for square in self._squares}
-        self._peers = {square: set(sum(self._units[square], [])) - set([square])
+        self._peers = {square: set(sum(self._units[square], [])) - {square}   # set()
                        for square in self._squares}
+
 #        print(self._rows)
 #        print(self._cols)
 #        [print(square, end=' ') for square in self._squares]
@@ -94,18 +98,21 @@ class Board(object):
 #        print(self._units)
 #        print(self._peers)
 
-#        @property
-#        def squares(self):
-#            return self._squares
-#
-#        @property
-#        def units(self):
-#            return self._units
-#
-#        @property
-#        def peers(self):
-#            return self._peers
+    @property
+    def digits(self):
+        return self._digits
 
+    @property
+    def squares(self):
+        return self._squares
+
+    @property
+    def units(self):
+        return self._units
+
+    @property
+    def peers(self):
+        return self._peers
 
     @staticmethod
     def _cross(seq_a, seq_b):
@@ -144,18 +151,20 @@ class Board(object):
         result.append('\n')
         return ''.join(result)
 
+
 # REFACTOR private attribute access
-board = Board()
-SQUARES = board._squares    # an ordered list of the squares
-UNITS = board._units        # a dictionary with a square as key
-PEERS = board._peers        # a dictionary with a square as key
+_board_ = _BoardConstants()
+# Constants used by other modules
+SQUARES = _board_.squares    # an ordered list of the squares
+UNITS = _board_.units        # a dictionary with a square as key
+PEERS = _board_.peers        # a dictionary with a square as key
+DIGITS = _board_.digits      # '123456789'
 
 
 if __name__ == '__main__':
 
-    board = Board()
-    #print(board.output(board._squares))
-    for key in board._squares[65:]:
-        print(board.output(board._peers[key]))
-    #print(board.output(board._peers['Bd']))
-
+    _board = _BoardConstants()
+    # print(_board.output(SQUARES))
+    for key in SQUARES[65:]:
+        print(_board.output(PEERS[key]))
+    # print(board.output(PEERS['Bd']))
