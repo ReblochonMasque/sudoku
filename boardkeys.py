@@ -152,13 +152,18 @@ class _BoardConstants(object):
         return ''.join(result)
 
 
-# REFACTOR private attribute access
+#TODO: REFACTOR private attribute access
 _board_ = _BoardConstants()
 # Constants used by other modules
-SQUARES = _board_.squares    # an ordered list of the squares
-UNITS = _board_.units        # a dictionary with a square as key
-PEERS = _board_.peers        # a dictionary with a square as key
-DIGITS = _board_.digits      # '123456789'
+SQUARES = _board_.squares    # an ordered list of every square_key
+                             # used to access UNITS, PEERS
+UNITS = _board_.units        # a dictionary containing the access keys for the rows, cols & boxes
+                             # of a square {'square_key' : [[square_keys for row],
+                             #                              [square_keys for col],
+                             #                              [square_keys for box]]}
+PEERS = _board_.peers        # a dictionary containing the access keys for the peers
+                             # {'square_key': [peers]}
+DIGITS = _board_.digits      # legal values for a solved square '123456789'
 
 
 if __name__ == '__main__':
