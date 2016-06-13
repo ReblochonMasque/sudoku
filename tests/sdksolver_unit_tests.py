@@ -18,8 +18,6 @@ class TestGrid(unittest.TestCase):
         valid_grid_0_chars = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         self.valid_grid_0 = make_grid_from_string(valid_grid_0_chars)
 
-
-    # TODO: test if grid is valid
     def test_is_valid_grid_0(self):
         """ tests is a valid grid is valid
         """
@@ -30,11 +28,11 @@ class TestGrid(unittest.TestCase):
     def test_is_invalid_grid_long_string(self):
         """ tests an invalid grid formed with a string that is either too long or too short
         """
-        invalid_long_grid_chars = '1234.4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-        # longer by '1234.' at the start
+        invalid_long_grid_chars = '12.4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        # longer by '12.' at the start
         result = True
         try:
-            invalid_long_grid = Grid().from_string(invalid_long_grid_chars)
+            Grid().from_string(invalid_long_grid_chars)
             result = False
         except ValueError:
             pass
@@ -49,7 +47,7 @@ class TestGrid(unittest.TestCase):
         # shorter by '4.....' removed from the start
         result = True
         try:
-            invalid_short_grid = Grid().from_string(invalid_short_grid_chars)
+            Grid().from_string(invalid_short_grid_chars)
             result = False
         except ValueError:
             pass
@@ -92,7 +90,8 @@ class TestGrid(unittest.TestCase):
         invalid_result = invalid_grid.is_valid_grid()
         self.assertFalse(invalid_result)
 
-#--- BASIC TESTS FOR GRID CLASS FORMATION -------------------------------------
+
+# --- BASIC TESTS FOR GRID CLASS FORMATION -------------------------------------
 
     def test_grid_instance(self):
         grid0 = Grid()

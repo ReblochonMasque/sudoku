@@ -39,29 +39,29 @@ class Grid(object):
             self._grid = {key: value for key, value in zip(SQUARES, chars)}
         return self
 
-    # @TODO: test validity of grid
     def is_valid_grid(self) -> bool:
         """
         verifies if a grid is valid
         --> proper size -> all squares have a value assigned                       V
                         -> no extra entries                                        V
         --> all values assigned to squares are legal <=> are in DIGITS or '0.'     V
-        --> unique values in rows / columns / boxes (UNITS)
-        --> unique values in PEERS
+        --> unique values in rows / columns / boxes (UNITS)                        V
+        --> unique values in PEERS                                                 V
 
         :return: True if is valid, False otherwise
         """
         # TODO: Change to lazy evaluation
+        # TODO: Refactor (checking PEERS is redundant)
         result = True
         result &= self._contains_all_keys()
         result &= self._are_values_legal()
         for square in SQUARES:
+            result &= self._is_unique_in_block(self._grid[square], PEERS[square])
             for block in UNITS[square]:
-                result &= self._is_unique(self._grid[square], block)
+                result &= self._is_unique_in_block(self._grid[square], block)
         return result
 
-    # TODO: refactor to take a square key instead of a value so it works with PEERS
-    def _is_unique(self, value, block):
+    def _is_unique_in_block(self, value, block):
         """
         checks if the given value is unique for the provided block of keys
         :param value: a value for a square
@@ -90,9 +90,6 @@ class Grid(object):
         return temp == SQUARES and len(temp) == len(SQUARES)
 
 
-
-
-
 def make_grid_from_string(values):
     """
     converts a string of values into a sudoku grid dictionary {square:char}
@@ -104,7 +101,6 @@ def make_grid_from_string(values):
     assert len(chars) == 81, "the grid has an incorrect size"
     return _grid.from_string(chars)
 
-#
 # @TODO: make a grid of values
 
 if __name__ == '__main__':
