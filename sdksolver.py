@@ -39,18 +39,24 @@ class Grid(object):
     def is_valid_grid(self) -> bool:
         """
         verifies if a grid is valid
-        --> proper size -> all squares have a value assigned
-                        -> no extra entries
-        --> all values assigned to squares are legal <=> are in DIGITS or '0.'
+        --> proper size -> all squares have a value assigned                       V
+                        -> no extra entries                                        V
+        --> all values assigned to squares are legal <=> are in DIGITS or '0.'     V
         --> unique values in rows / columns / boxes
-
         :return: True if is valid, False otherwise
         """
+        # TODO: Change to lazy evaluation
         result = True
         result &= self._contains_all_keys()
-        for square in SQUARES:
-            pass
+        result &= self._are_values_legal()
         return result
+
+    def _are_values_legal(self):
+        """
+        checks that all values in self._grid are legal (in DIGITS or '0.')
+        :return: True if all values are legal, False otherwise
+        """
+        return all([value in DIGITS or value in '0.' for value in self._grid.values()])
 
     def _contains_all_keys(self) -> bool:
         """

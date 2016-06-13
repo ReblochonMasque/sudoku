@@ -18,11 +18,22 @@ class TestGrid(unittest.TestCase):
         valid_grid_0_chars = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         self.valid_grid_0 = make_grid_from_string(valid_grid_0_chars)
 
+
     # @TODO: test if grid is valid
     def test_is_valid_grid_0(self):
+        """ tests is a valid grid is valid
+        """
         result = self.valid_grid_0.is_valid_grid()
         self.assertTrue(result)
 
+    def test_is_invalid_grid_illegal_chars(self):
+        """ tests an invalid grid that contains illegal characters
+        (must be constructed via Grid.from_string i/o factory function that checks the validity of input string)
+        """
+        invalid_grid_chars = 'z.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        invalid_grid = Grid().from_string(invalid_grid_chars)
+        invalid_result = invalid_grid.is_valid_grid()
+        self.assertFalse(invalid_result)
 
 
 #### BASIC TESTS FOR GRID CLASS FORMATION ####
