@@ -33,7 +33,10 @@ class Grid(object):
         :return: a sudoku grid build from the input values and checked for validity
                  but not for uniqueness of solution
         """
-        self._grid = {key: value for key, value in zip(SQUARES, chars)}
+        if len(chars) != len(SQUARES):
+            raise ValueError('Parameter string length is wrong')
+        else:
+            self._grid = {key: value for key, value in zip(SQUARES, chars)}
         return self
 
     def is_valid_grid(self) -> bool:
@@ -60,7 +63,7 @@ class Grid(object):
 
     def _contains_all_keys(self) -> bool:
         """
-        checks if self._grid.keys() contains the proper keys
+        checks if self._grid.keys() contains the proper keys and not more
         :return: True if self_grid contains all keys and not more, False otherwise
         """
         temp = sorted(list(self._grid.keys()))
