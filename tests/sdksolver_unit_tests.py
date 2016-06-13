@@ -15,10 +15,17 @@ from sdksolver import Grid, make_grid_from_string
 class TestGrid(unittest.TestCase):
 
     def setUp(self):
-        # self.grid0 = Grid()
-        pass
+        valid_grid_0_chars = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        self.valid_grid_0 = make_grid_from_string(valid_grid_0_chars)
 
     # @TODO: test if grid is valid
+    def test_is_valid_grid_0(self):
+        result = self.valid_grid_0.is_valid_grid()
+        self.assertTrue(result)
+
+
+
+#### BASIC TESTS FOR GRID CLASS FORMATION ####
 
     def test_grid_instance(self):
         grid0 = Grid()
