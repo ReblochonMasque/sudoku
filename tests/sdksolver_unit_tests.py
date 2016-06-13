@@ -65,6 +65,32 @@ class TestGrid(unittest.TestCase):
         invalid_result = invalid_grid.is_valid_grid()
         self.assertFalse(invalid_result)
 
+    def test_non_uniques_in_rows(self):
+        """ tests if all values in a row are unique
+        """
+        chars_repeats_in_row = '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        #                       ^  ^
+        invalid_grid = Grid().from_string(chars_repeats_in_row)
+        invalid_result = invalid_grid.is_valid_grid()
+        self.assertFalse(invalid_result)
+
+    def test_non_uniques_in_cols(self):
+        """ tests if all values in a column are unique
+        """
+        chars_repeats_in_col = '4.....8.5.3..........7.....42.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        #                       ^                          ^
+        invalid_grid = Grid().from_string(chars_repeats_in_col)
+        invalid_result = invalid_grid.is_valid_grid()
+        self.assertFalse(invalid_result)
+
+    def test_non_uniques_in_boxes(self):
+        """ tests if all values in a box are unique
+        """
+        chars_repeats_in_box = '4.....8.543..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        #                       ^        ^
+        invalid_grid = Grid().from_string(chars_repeats_in_box)
+        invalid_result = invalid_grid.is_valid_grid()
+        self.assertFalse(invalid_result)
 
 #--- BASIC TESTS FOR GRID CLASS FORMATION -------------------------------------
 
