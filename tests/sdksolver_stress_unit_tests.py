@@ -16,6 +16,8 @@ class TestStressGrid(unittest.TestCase):
     """stress tests of Grid with a large number of solved and unsolved puzzles
     """
 
+    # TODO: add stress tests for invalid solved and unsolved puzzles
+
     def test_valid_solved_puzzle(self):
         """
         uses the solved grids read from a file to test the testing of a valid grid
