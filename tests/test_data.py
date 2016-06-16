@@ -26,7 +26,7 @@ def filter_and_clean(raw_data):
     """
     strips white space, tabs and line feeds at end of each line
     omits lines starting with '#'
-    :param raw_data:
+    :param raw_data: a list of data that needs clean up
     :return: a python list of cleaned up data
     """
     clean_data = []
@@ -65,4 +65,3 @@ if __name__ == '__main__':
         for line in clean_data[:10]:
             print(line)
         print()
-
