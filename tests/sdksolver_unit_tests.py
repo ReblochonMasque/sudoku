@@ -91,20 +91,6 @@ class TestGrid(unittest.TestCase):
         invalid_result = invalid_grid.is_valid_grid()
         self.assertFalse(invalid_result)
 
-# --- TESTS FROM FILE DATA
-
-    def test_valid_solved_puzzle(self):
-        """
-        uses the solved grids read from a file to test the testing of a valid grid
-        """
-        path = 'resources/'
-        valid_solved_data = test_data.get_data_from(path + 'solved_10000_grids_startwith_123456789.txt')
-        for valid_puzzle in valid_solved_data:
-            puzzle = make_grid_from_string(valid_puzzle)
-            result = puzzle.is_valid_grid()
-            self.assertTrue(result)
-
-
 
 # --- BASIC TESTS FOR GRID CLASS FORMATION -------------------------------------
 
