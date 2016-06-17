@@ -26,6 +26,18 @@ class Grid(object):
     """
     def __init__(self):
         self._grid = None
+        self._possible_values = {square:DIGITS for square in SQUARES}
+
+    @property
+    def possible_values(self):
+        return self._possible_values
+
+    # def make_values(self):
+    #     """
+    #     uses a grid to build a dictionary of possible values {square: digits}
+    #     :return:
+    #     """
+    #     pass
 
     def from_string(self, chars):
         """
