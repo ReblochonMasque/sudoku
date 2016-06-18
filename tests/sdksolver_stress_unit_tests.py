@@ -8,8 +8,10 @@ __author__ = 'Frederic Dupont'
 """
 
 import unittest
-from sdksolver import make_grid_from_string
+
 import test_data
+
+from sdksolver import make_grid_from_string
 
 
 class TestStressGrid(unittest.TestCase):
