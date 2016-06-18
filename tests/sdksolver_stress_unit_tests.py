@@ -9,9 +9,8 @@ __author__ = 'Frederic Dupont'
 
 import unittest
 
-import test_data
-
-from sdksolver import make_grid_from_string
+from sudoku.sdksolver import make_grid_from_string
+from tests import test_data
 
 
 class TestStressGrid(unittest.TestCase):

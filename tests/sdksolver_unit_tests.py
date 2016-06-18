@@ -10,8 +10,9 @@ Created on Wed Jun  1 15:30:52 2016
 
 import unittest
 
-from boardkeys import DIGITS
-from sdksolver import Grid, make_grid_from_string
+from sudoku.sdksolver import Grid, make_grid_from_string
+
+from sudoku.boardkeys import DIGITS
 
 
 class TestGrid(unittest.TestCase):

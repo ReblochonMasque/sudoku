@@ -17,7 +17,7 @@ Created on Wed Jun  1 15:27:23 2016
 #             {'square_key': [peers]}
 # DIGITS  --> legal values for a solved square '123456789'
 
-from boardkeys import SQUARES, UNITS, PEERS, DIGITS
+from sudoku.boardkeys import SQUARES, UNITS, PEERS, DIGITS
 
 
 class Grid(object):
