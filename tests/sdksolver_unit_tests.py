@@ -9,9 +9,9 @@ Created on Wed Jun  1 15:30:52 2016
 """
 
 import unittest
+
 from boardkeys import DIGITS
 from sdksolver import Grid, make_grid_from_string
-import test_data
 
 
 class TestGrid(unittest.TestCase):
@@ -107,6 +107,13 @@ class TestGrid(unittest.TestCase):
         result = self.valid_grid_0.possible_values.values()
         self.assertTrue(all(res == DIGITS for res in result))
 
+    def test_print_output(self):
+        """
+        tests that __str__ returns the proper string
+        """
+        expected = ''
+        result = str(self.valid_grid_0)
+        self.assertEqual(result, expected)
 
     # --- BASIC TESTS FOR GRID CLASS FORMATION -------------------------------------
 

@@ -26,7 +26,7 @@ class Grid(object):
     """
     def __init__(self):
         self._grid = None
-        self._possible_values = {square:DIGITS for square in SQUARES}
+        self._possible_values = {square: DIGITS for square in SQUARES}
 
     @property
     def possible_values(self):
@@ -101,6 +101,13 @@ class Grid(object):
         temp = sorted(list(self._grid.keys()))
         return temp == SQUARES and len(temp) == len(SQUARES)
 
+    def __str__(self):
+        result = ''
+        return result
+
+# @TODO: make a grid of values
+# @TODO: add a __str__ for self._possible_values
+
 
 def make_grid_from_string(values):
     """
@@ -113,7 +120,6 @@ def make_grid_from_string(values):
     assert len(chars) == 81, "the grid has an incorrect size"
     return _grid.from_string(chars)
 
-# @TODO: make a grid of values
 
 if __name__ == '__main__':
 
