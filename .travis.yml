@@ -4,6 +4,6 @@ python: "3.5"
 install: "pip install -r requirements.txt"
 # command to run tests
 script:
- - flake8 .
- - pylint .
- - nosetests --with-coverage --cover-package=sudoku_py3
+ - nosetests --with-coverage --cover-package=sudoku
+# - flake8 .
+# - pylint .
