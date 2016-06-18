@@ -9,6 +9,14 @@ Implementation of a sudoku puzzle solver
 - inspired from Peter Norvig's early article: [Solving Every Sudoku Puzzle](http://norvig.com/sudoku.html)
 - related to Udacity [Software Testing Course](https://www.udacity.com/wiki/cs258)
 
+---
+Learning Goals are to:
+---
+
+- TDD
+- Architecture/design of project
+- Use of Git
+- Continuous integration with Travis for tests, coverage and code quality
 
 ---
 Future
