@@ -10,6 +10,7 @@ Created on Mon May 30 17:01:26 2016
 """
 
 import unittest
+
 from boardkeys import _BoardConstants
 
 
