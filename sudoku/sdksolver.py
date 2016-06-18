@@ -18,7 +18,7 @@ Created on Wed Jun  1 15:27:23 2016
 # DIGITS  --> legal values for a solved square '123456789'
 
 from sudoku.boardkeys import SQUARES, UNITS, PEERS, DIGITS
-
+# TODO: resolve import reference for coverage runs
 
 class Grid(object):
     """

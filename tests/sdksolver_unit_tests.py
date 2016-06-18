@@ -128,8 +128,6 @@ I | 123456789  123456789  123456789 | 123456789  123456789  123456789 | 12345678
    --------------------------------- --------------------------------- --------------------------------- \n\
 """
         result = str(self.valid_grid_0)
-        print('result = \n' + result)
-        print('expected) = \n' + expected)
         self.assertEqual(result, expected)
 
     # --- BASIC TESTS FOR GRID CLASS FORMATION -------------------------------------

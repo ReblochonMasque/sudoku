@@ -32,6 +32,14 @@ class TestBoard(unittest.TestCase):
                                  'Ha', 'Hb', 'Hc', 'Hd', 'He', 'Hf', 'Hg', 'Hh', 'Hi',
                                  'Ia', 'Ib', 'Ic', 'Id', 'Ie', 'If', 'Ig', 'Ih', 'Ii']
 
+    def test_getter_digits(self):
+        """
+        tests @property get _digits
+        """
+        expected = '123456789'
+        result = self.board2.digits
+        self.assertEqual(result, expected)
+
     def test_an_object_Board_is_created(self):
         board_1 = _BoardConstants()
         self.assertIsInstance(board_1, _BoardConstants)
