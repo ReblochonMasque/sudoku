@@ -19,12 +19,14 @@ class TestStressGrid(unittest.TestCase):
 
     # TODO: add stress tests for invalid solved and unsolved puzzles
 
+    def setUp(self):
+        self.path = 'resources/'
+
     def test_valid_solved_puzzle(self):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        path = '../resources/'
-        valid_solved_data = test_data.get_data_from(path + 'solved_10000_grids_startwith_123456789.txt')
+        valid_solved_data = test_data.get_data_from(self.path + 'solved_10000_grids_startwith_123456789.txt')
         for valid_puzzle in valid_solved_data:
             puzzle = make_grid_from_string(valid_puzzle)
             result = puzzle.is_valid_grid()
@@ -34,8 +36,7 @@ class TestStressGrid(unittest.TestCase):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        path = '../resources/'
-        valid_solved_data = test_data.get_data_from(path + 'unsolved_10000_grids_45_numbers.txt')
+        valid_solved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_45_numbers.txt')
         for valid_puzzle in valid_solved_data:
             puzzle = make_grid_from_string(valid_puzzle)
             result = puzzle.is_valid_grid()
@@ -45,8 +46,7 @@ class TestStressGrid(unittest.TestCase):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        path = '../resources/'
-        valid_solved_data = test_data.get_data_from(path + 'unsolved_10000_grids_40_numbers.txt')
+        valid_solved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_40_numbers.txt')
         for valid_puzzle in valid_solved_data:
             puzzle = make_grid_from_string(valid_puzzle)
             result = puzzle.is_valid_grid()
@@ -56,8 +56,7 @@ class TestStressGrid(unittest.TestCase):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        path = '../resources/'
-        valid_solved_data = test_data.get_data_from(path + 'unsolved_10000_grids_35_numbers.txt')
+        valid_solved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_35_numbers.txt')
         for valid_puzzle in valid_solved_data:
             puzzle = make_grid_from_string(valid_puzzle)
             result = puzzle.is_valid_grid()
@@ -67,8 +66,7 @@ class TestStressGrid(unittest.TestCase):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        path = '../resources/'
-        valid_solved_data = test_data.get_data_from(path + 'unsolved_10000_grids_30_numbers.txt')
+        valid_solved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_30_numbers.txt')
         for valid_puzzle in valid_solved_data:
             puzzle = make_grid_from_string(valid_puzzle)
             result = puzzle.is_valid_grid()
@@ -78,8 +76,7 @@ class TestStressGrid(unittest.TestCase):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        path = '../resources/'
-        valid_solved_data = test_data.get_data_from(path + 'unsolved_10000_grids_25_numbers.txt')
+        valid_solved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_25_numbers.txt')
         for valid_puzzle in valid_solved_data:
             puzzle = make_grid_from_string(valid_puzzle)
             result = puzzle.is_valid_grid()
