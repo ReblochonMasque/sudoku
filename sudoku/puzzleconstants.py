@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-boardkeys.py
+puzzleconstants.py
 Sudoku board representation - keys and addresses
 Created on Mon May 30 17:00:20 2016
 @author: fredericdupont
@@ -9,7 +9,7 @@ Created on Mon May 30 17:00:20 2016
 import math
 
 
-class _BoardConstants(object):
+class _PuzzleConstants(object):
     """
     represents a sudoku board with rows in CAPITAL and cols in lower case, and
     provides the data structures and access keys to manipulate it
@@ -17,7 +17,7 @@ class _BoardConstants(object):
             --> rows are A to I
             --> cols are a to i
 
-    _BoardConstants repr:
+    _PuzzleConstants repr:
        a  b  c    d  e  f    g  h  i
     A  Aa Ab Ac | Ad Ae Af | Ag Ah Ai
     B  Ba Bb Bc | Bd Be Bf | Bg Bh Bi
@@ -78,11 +78,11 @@ class _BoardConstants(object):
         self._size_root = math.sqrt(self._size)
         self._rows = [chr(ord('A')+_) for _ in range(self._size)]
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
-        self._squares = _BoardConstants._cross(self._rows, self._cols)
+        self._squares = _PuzzleConstants._cross(self._rows, self._cols)
 
-        self._unitlist = [_BoardConstants._cross(self._rows, col) for col in self._cols] + \
-                         [_BoardConstants._cross(row, self._cols) for row in self._rows] + \
-                         [_BoardConstants._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
+        self._unitlist = [_PuzzleConstants._cross(self._rows, col) for col in self._cols] + \
+                         [_PuzzleConstants._cross(row, self._cols) for row in self._rows] + \
+                         [_PuzzleConstants._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
                           for col in ('abc', 'def', 'ghi')]
 
         self._units = {square: [unit for unit in self._unitlist if square in unit]
@@ -152,24 +152,29 @@ class _BoardConstants(object):
         return ''.join(result)
 
 
-#TODO: REFACTOR private attribute access
-_board_ = _BoardConstants()
+# TODO: REFACTOR private attribute access
+_puzzle_ = _PuzzleConstants()
 # Constants used by other modules
-SQUARES = _board_.squares    # an ordered list of every square_key
-                             # used to access UNITS, PEERS
-UNITS = _board_.units        # a dictionary containing the access keys for the rows, cols & boxes
-                             # of a square {'square_key' : [[square_keys for row],
-                             #                              [square_keys for col],
-                             #                              [square_keys for box]]}
-PEERS = _board_.peers        # a dictionary containing the access keys for the peers
-                             # {'square_key': [peers]}
-DIGITS = _board_.digits      # legal values for a solved square '123456789'
+SQUARES = _puzzle_.squares      # an ordered list of every square_key
+                                # used to access UNITS, PEERS
+
+UNITS = _puzzle_.units          # a dictionary containing the access keys for the rows, cols & boxes
+                                # of a square {'square_key' : [[square_keys for row],
+                                #                              [square_keys for col],
+                                #                              [square_keys for box]]}
+
+PEERS = _puzzle_.peers          # a dictionary containing the access keys for the peers
+                                # {'square_key': [peers]}
+
+DIGITS = _puzzle_.digits        # legal values for a solved square '123456789'
 
 
-if __name__ == '__main__':
 
-    _board = _BoardConstants()
-    # print(_board.output(SQUARES))
-    for key in SQUARES[65:]:
-        print(_board.output(PEERS[key]))
-    # print(board.output(PEERS['Bd']))
+# if __name__ == '__main__':
+#    pass
+
+    # _puzzle = _PuzzleConstants()
+    # print(_puzzle.output(SQUARES))
+    # for squ in SQUARES[65:]:
+    #     print(_puzzle.output(PEERS[squ]))
+    # print(_puzzle.output(PEERS['Bd']))

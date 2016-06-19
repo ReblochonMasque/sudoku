@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-sdksolver.py
+sdkpuzzle.py
 sudoku solver
 Created on Wed Jun  1 15:27:23 2016
 
@@ -17,16 +17,16 @@ Created on Wed Jun  1 15:27:23 2016
 #             {'square_key': [peers]}
 # DIGITS  --> legal values for a solved square '123456789'
 
-from sudoku.boardkeys import SQUARES, UNITS, PEERS, DIGITS
+from sudoku.puzzleconstants import SQUARES, UNITS, PEERS, DIGITS
 # TODO: resolve import reference for coverage runs
 
 
-class Grid(object):
+class Puzzle(object):
     """
     represents a sudoku grid as a dictionary of {squares: values}
     """
 
-    value_to_possible_value = {'.': '123456789',
+    VALUE_TO_POSSIBLE_VALUE = {'.': '123456789',
                                '0': '123456789',
                                '1': '1........',
                                '2': '.2.......',
@@ -38,7 +38,7 @@ class Grid(object):
                                '8': '.......8.',
                                '9': '........9',
                                }
-    possible_value_to_value = {'123456789': '.',
+    POSSIBLE_VALUE_TO_VALUE = {'123456789': '.',
                                '1........': '1',
                                '.2.......': '2',
                                '..3......': '3',
@@ -64,7 +64,7 @@ class Grid(object):
         """
         for square, value in self._grid.items():
             if value not in '.0':
-                self._possible_values[square] = Grid.value_to_possible_value[value]
+                self._possible_values[square] = Puzzle.VALUE_TO_POSSIBLE_VALUE[value]
 
     # def filter_remaining_possible_values(self):
     #     """
@@ -166,21 +166,21 @@ def make_grid_from_string(values):
     using a DIGIT for value and '0' or '.' for empties
     ignores everything else
     """
-    _grid = Grid()
+    _grid = Puzzle()
     chars = [char for char in values if char in DIGITS or char in '0.']
     assert len(chars) == 81, "the grid has an incorrect size"
     return _grid.from_string(chars)
 
 
-if __name__ == '__main__':
-
-    grid = make_grid_from_string(''.join(['.'] * 81))
-    print(grid)
-    grid.is_valid_grid()
-    grid = make_grid_from_string(''.join(['123456789'] * 9))
-    print(grid)
-
-    chars_repeats_in_row = '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-    invalid_grid = Grid().from_string(chars_repeats_in_row)
-    invalid_result = invalid_grid.is_valid_grid()
-    print(invalid_result)
+# if __name__ == '__main__':
+#
+#     grid = make_grid_from_string(''.join(['.'] * 81))
+#     print(grid)
+#     grid.is_valid_grid()
+#     grid = make_grid_from_string(''.join(['123456789'] * 9))
+#     print(grid)
+#
+#     chars_repeats_in_row = '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+#     invalid_grid = Puzzle().from_string(chars_repeats_in_row)
+#     invalid_result = invalid_grid.is_valid_grid()
+#     print(invalid_result)
