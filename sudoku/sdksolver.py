@@ -20,10 +20,36 @@ Created on Wed Jun  1 15:27:23 2016
 from sudoku.boardkeys import SQUARES, UNITS, PEERS, DIGITS
 # TODO: resolve import reference for coverage runs
 
+
 class Grid(object):
     """
     represents a sudoku grid as a dictionary of {squares: values}
     """
+
+    value_to_possible_value = {'.': '123456789',
+                               '0': '123456789',
+                               '1': '1........',
+                               '2': '.2.......',
+                               '3': '..3......',
+                               '4': '...4.....',
+                               '5': '....5....',
+                               '6': '.....6...',
+                               '7': '......7..',
+                               '8': '.......8.',
+                               '9': '........9',
+                               }
+    possible_value_to_value = {'123456789': '.',
+                               '1........': '1',
+                               '.2.......': '2',
+                               '..3......': '3',
+                               '...4.....': '4',
+                               '....5....': '5',
+                               '.....6...': '6',
+                               '......7..': '7',
+                               '.......8.': '8',
+                               '........9': '9',
+                               }
+
     def __init__(self):
         self._grid = None
         self._possible_values = {square: DIGITS for square in SQUARES}
@@ -32,12 +58,22 @@ class Grid(object):
     def possible_values(self):
         return self._possible_values
 
-    # def make_values(self):
+    def parse_grid(self):
+        """
+        assigns possible values to self._possible_values according to the values in self._grid
+        """
+        for square, value in self._grid.items():
+            if value not in '.0':
+                self._possible_values[square] = Grid.value_to_possible_value[value]
+
+    # def filter_remaining_possible_values(self):
     #     """
-    #     uses a grid to build a dictionary of possible values {square: digits}
-    #     :return:
+    #     from a dictionary of all possible values {square: digits},
+    #     uses a grid to build a dictionary of possible values {square: possible_digits}
+    #     :return: --> mutates self._possible_values
     #     """
-    #     pass
+    #     for square in SQUARES:
+    #         if
 
     def from_string(self, chars):
         """
