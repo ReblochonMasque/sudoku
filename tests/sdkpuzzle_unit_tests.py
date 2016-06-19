@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-sdksolver_unit_tests.py
+sdkpuzzle_unit_tests.py
 Unit Tests for sdksolver
 
 Created on Wed Jun  1 15:30:52 2016
@@ -10,12 +10,12 @@ Created on Wed Jun  1 15:30:52 2016
 
 import unittest
 
-from sudoku.sdksolver import Grid, make_grid_from_string
+from sudoku.sdkpuzzle import Puzzle, make_grid_from_string
 
-from sudoku.boardkeys import DIGITS, SQUARES
+from sudoku.puzzleconstants import DIGITS, SQUARES
 
 
-class TestGrid(unittest.TestCase):
+class TestPuzzle(unittest.TestCase):
 
     def setUp(self):
         valid_grid_0_chars = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
@@ -43,7 +43,6 @@ class TestGrid(unittest.TestCase):
                                      'Ii': '123456789', 'Ec': '123456789', 'Ca': '123456789', 'Fh': '123456789',
                                      'Be': '123456789'}
 
-
     def test_is_valid_grid_0(self):
         """ tests is a valid grid is valid
         """
@@ -58,7 +57,7 @@ class TestGrid(unittest.TestCase):
         # longer by '12.' at the start
         result = True
         try:
-            Grid().from_string(invalid_long_grid_chars)
+            Puzzle().from_string(invalid_long_grid_chars)
             result = False
         except ValueError:
             pass
@@ -73,7 +72,7 @@ class TestGrid(unittest.TestCase):
         # shorter by '4.....' removed from the start
         result = True
         try:
-            Grid().from_string(invalid_short_grid_chars)
+            Puzzle().from_string(invalid_short_grid_chars)
             result = False
         except ValueError:
             pass
@@ -82,10 +81,10 @@ class TestGrid(unittest.TestCase):
 
     def test_is_invalid_grid_illegal_chars(self):
         """ tests an invalid grid that contains illegal characters
-        (must be constructed via Grid.from_string i/o factory function that checks the validity of input string)
+        (must be constructed via Puzzle.from_string i/o factory function that checks the validity of input string)
         """
         invalid_grid_chars = 'z.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-        invalid_grid = Grid().from_string(invalid_grid_chars)
+        invalid_grid = Puzzle().from_string(invalid_grid_chars)
         invalid_result = invalid_grid.is_valid_grid()
         self.assertFalse(invalid_result)
 
@@ -94,7 +93,7 @@ class TestGrid(unittest.TestCase):
         """
         chars_repeats_in_row = '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         #                       ^  ^
-        invalid_grid = Grid().from_string(chars_repeats_in_row)
+        invalid_grid = Puzzle().from_string(chars_repeats_in_row)
         invalid_result = invalid_grid.is_valid_grid()
         self.assertFalse(invalid_result)
 
@@ -103,7 +102,7 @@ class TestGrid(unittest.TestCase):
         """
         chars_repeats_in_col = '4.....8.5.3..........7.....42.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         #                       ^                          ^
-        invalid_grid = Grid().from_string(chars_repeats_in_col)
+        invalid_grid = Puzzle().from_string(chars_repeats_in_col)
         invalid_result = invalid_grid.is_valid_grid()
         self.assertFalse(invalid_result)
 
@@ -112,7 +111,7 @@ class TestGrid(unittest.TestCase):
         """
         chars_repeats_in_box = '4.....8.543..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         #                       ^        ^
-        invalid_grid = Grid().from_string(chars_repeats_in_box)
+        invalid_grid = Puzzle().from_string(chars_repeats_in_box)
         invalid_result = invalid_grid.is_valid_grid()
         self.assertFalse(invalid_result)
 
@@ -188,7 +187,6 @@ class TestGrid(unittest.TestCase):
         self.assertTrue(all(result[square] == _exp_possible_values[square]
                             for square in SQUARES))
 
-
     # def test_filter_remaining_possible_values_1(self):
     #     """
     #     tests whether the possible remaining values filtered for a given puzzle are correct
@@ -224,7 +222,6 @@ class TestGrid(unittest.TestCase):
     #     self.assertEqual(result.keys(), self._all_possible_values.keys())
     #     self.assertTrue(all(result[square] == self._exp_possible_values[square]
     #                         for square in SQUARES))
-
 
     def test_values_keys_match_grid_keys(self):
         """tests that the keys of _grid and _values are the same
@@ -263,18 +260,18 @@ I | 123456789  123456789  123456789 | 123456789  123456789  123456789 | 12345678
     # --- BASIC TESTS FOR GRID CLASS FORMATION -------------------------------------
 
     def test_grid_instance(self):
-        grid0 = Grid()
-        self.assertIsInstance(grid0, Grid)
+        grid0 = Puzzle()
+        self.assertIsInstance(grid0, Puzzle)
 
     def test_grid_instance_from_chars_linear(self):
         chars0 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-        grid0_from_chars = Grid().from_string(chars0)
-        self.assertIsInstance(grid0_from_chars, Grid)
+        grid0_from_chars = Puzzle().from_string(chars0)
+        self.assertIsInstance(grid0_from_chars, Puzzle)
 
     def test_grid_instance_factory_from_string1(self):
         my_string0 = '4.... /.8.5.3..## :; ...slskfj.....7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         grid0_from_string = make_grid_from_string(my_string0)
-        self.assertIsInstance(grid0_from_string, Grid)
+        self.assertIsInstance(grid0_from_string, Puzzle)
 
     def test_grid_instance_factory_from_string_block(self):
         my_string1 = """
@@ -288,7 +285,7 @@ I | 123456789  123456789  123456789 | 123456789  123456789  123456789 | 12345678
 500200000
 104000000"""
         grid1_from_string = make_grid_from_string(my_string1)
-        self.assertIsInstance(grid1_from_string, Grid)
+        self.assertIsInstance(grid1_from_string, Puzzle)
 
     def test_grid_instance_factory_from_string_formatted(self):
         my_string2 = """
@@ -305,7 +302,7 @@ I | 123456789  123456789  123456789 | 123456789  123456789  123456789 | 12345678
 1 . 4 |. . . |. . .
 """
         grid2_from_string = make_grid_from_string(my_string2)
-        self.assertIsInstance(grid2_from_string, Grid)
+        self.assertIsInstance(grid2_from_string, Puzzle)
 
 if __name__ == '__main__':
     unittest.main()
