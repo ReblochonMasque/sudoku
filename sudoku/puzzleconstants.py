@@ -169,10 +169,12 @@ PEERS = _puzzle_.peers          # a dictionary containing the access keys for th
 DIGITS = _puzzle_.digits        # legal values for a solved square '123456789'
 
 
-if __name__ == '__main__':
 
-    _puzzle = _PuzzleConstants()
-    # print(_board.output(SQUARES))
-    for squ in SQUARES[65:]:
-        print(_puzzle.output(PEERS[squ]))
-    # print(board.output(PEERS['Bd']))
+# if __name__ == '__main__':
+#    pass
+
+    # _puzzle = _PuzzleConstants()
+    # print(_puzzle.output(SQUARES))
+    # for squ in SQUARES[65:]:
+    #     print(_puzzle.output(PEERS[squ]))
+    # print(_puzzle.output(PEERS['Bd']))

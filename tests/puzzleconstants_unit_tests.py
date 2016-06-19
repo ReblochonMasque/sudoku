@@ -277,6 +277,30 @@ I  Ia Ib Ic | Id Ie If | Ig Ih Ii \n\n"""
         result = self.board1.output(self.board1._squares)
         self.assertEqual(result, reference_string)
 
+    def testprinted_output_with_null(self):
+        """
+        compares the printed output to a reference string
+        """
+        reference_string = """   a  b  c    d  e  f    g  h  i  \n\
+A  .  .  .  | Ad Ae Af | .  .  .  \n\
+B  Ba Bb Bc | .  Be Bf | Bg Bh Bi \n\
+C  .  .  .  | Cd Ce Cf | .  .  .  \n\
+   ---------+----------+--------- \n\
+D  .  .  .  | Dd .  .  | .  .  .  \n\
+E  .  .  .  | Ed .  .  | .  .  .  \n\
+F  .  .  .  | Fd .  .  | .  .  .  \n\
+   ---------+----------+--------- \n\
+G  .  .  .  | Gd .  .  | .  .  .  \n\
+H  .  .  .  | Hd .  .  | .  .  .  \n\
+I  .  .  .  | Id .  .  | .  .  .  \n\n"""
+
+        _puzzle = _PuzzleConstants()
+        peers_Bd = {'Hd', 'Be', 'Bh', 'Bg', 'Id', 'Bf', 'Bb', 'Ba', 'Ce', 'Cf', 'Ed', 'Bc', 'Cd', 'Gd', 'Bi', 'Af', 'Ad', 'Dd', 'Fd', 'Ae'}
+
+        result = _puzzle.output(peers_Bd)
+        self.assertEqual(result, reference_string)
+
+
 #    def test_various_board_sizes(self):
 #        """Not implemented - must revert to a 9x9 board
 #        """
