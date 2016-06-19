@@ -172,15 +172,15 @@ def make_grid_from_string(values):
     return _grid.from_string(chars)
 
 
-if __name__ == '__main__':
-
-    grid = make_grid_from_string(''.join(['.'] * 81))
-    print(grid)
-    grid.is_valid_grid()
-    grid = make_grid_from_string(''.join(['123456789'] * 9))
-    print(grid)
-
-    chars_repeats_in_row = '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-    invalid_grid = Puzzle().from_string(chars_repeats_in_row)
-    invalid_result = invalid_grid.is_valid_grid()
-    print(invalid_result)
+# if __name__ == '__main__':
+#
+#     grid = make_grid_from_string(''.join(['.'] * 81))
+#     print(grid)
+#     grid.is_valid_grid()
+#     grid = make_grid_from_string(''.join(['123456789'] * 9))
+#     print(grid)
+#
+#     chars_repeats_in_row = '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+#     invalid_grid = Puzzle().from_string(chars_repeats_in_row)
+#     invalid_result = invalid_grid.is_valid_grid()
+#     print(invalid_result)
