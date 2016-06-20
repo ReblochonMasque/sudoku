@@ -22,6 +22,7 @@ Learning Goals are to:
 - Architecture/design of project
 - Use of Git
 - Continuous integration with Travis for tests, coverage and code quality
+- Use of Mocks in unit tests
 
 =======
 Future:
