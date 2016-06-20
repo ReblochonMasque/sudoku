@@ -35,8 +35,8 @@ class Puzzle(object):
                                '6': '.....6...',
                                '7': '......7..',
                                '8': '.......8.',
-                               '9': '........9',
-                               }
+                               '9': '........9'}
+
     POSSIBLE_VALUE_TO_VALUE = {'123456789': '.',
                                '1........': '1',
                                '.2.......': '2',
@@ -46,8 +46,7 @@ class Puzzle(object):
                                '.....6...': '6',
                                '......7..': '7',
                                '.......8.': '8',
-                               '........9': '9',
-                               }
+                               '........9': '9'}
 
     def __init__(self):
         self._grid = None
@@ -172,7 +171,8 @@ def make_grid_from_string(values):
 #     grid = make_grid_from_string(''.join(['123456789'] * 9))
 #     print(grid)
 #
-#     chars_repeats_in_row = '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+#     chars_repeats_in_row =
+#     '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
 #     invalid_grid = Puzzle().from_string(chars_repeats_in_row)
 #     invalid_result = invalid_grid.is_valid_grid()
 #     print(invalid_result)

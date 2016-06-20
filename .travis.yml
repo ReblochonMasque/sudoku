@@ -16,4 +16,4 @@ script:
 
 after_success:
   - coveralls
-  - pylint --output-format=html
+  - pylint sudoku

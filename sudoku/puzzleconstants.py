@@ -75,7 +75,7 @@ class _PuzzleConstants(object):
         assert size == 9
         self._size = size
         self._digits = ''.join([str(idx) for idx in range(1, 10)])
-        self._size_root = math.sqrt(self._size)
+        # self._size_root = math.sqrt(self._size)
         self._rows = [chr(ord('A')+_) for _ in range(self._size)]
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
         self._squares = _PuzzleConstants._cross(self._rows, self._cols)
@@ -129,7 +129,7 @@ class _PuzzleConstants(object):
         """pretty prints a collection of square keys
         """
         result = ['   '] + [col + '    '
-                            if not (idx + 1) % self._size_root and (idx + 1) % self._size
+                            if not (idx + 1) % math.sqrt(self._size) and (idx + 1) % self._size
                             else col + '  '
                             for idx, col in enumerate(self._cols)] + ['\n']
 
@@ -143,13 +143,14 @@ class _PuzzleConstants(object):
                 result.append(self._rows[idx // self._size] + '  ')
             result.append(elt + ' ')
 
-            if not (idx + 1) % self._size_root and (idx + 1) % self._size:
+            if not (idx + 1) % math.sqrt(self._size) and (idx + 1) % self._size:
                 result += '| '
 
             if not (idx + 1) % self._size:
                 result.append('\n')
 
-            if not (idx + 1) % (self._size * self._size_root) and idx < self._size**2 - self._size:
+            if not (idx + 1) % (self._size * math.sqrt(self._size)) \
+                    and idx < self._size**2 - self._size:
                 result.append('   ---------+----------+--------- \n')
 
         result.append('\n')
@@ -170,7 +171,6 @@ PEERS = PUZZLE_C.peers          # a dictionary containing the access keys for th
                                 # {'square_key': [peers]}
 
 DIGITS = PUZZLE_C.digits        # legal values for a solved square '123456789'
-
 
 
 # if __name__ == '__main__':
