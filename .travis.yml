@@ -1,9 +1,19 @@
+# run on new Travis container infrastructure
+sudo: false
+
 language: python
 python: "3.5"
+
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+ - "pip install -r requirements.txt"
+ - "pip install coveralls"
+ - "pip install pylint"
+
 # command to run tests
 script:
  - nosetests --with-coverage --cover-package=sudoku
-# - flake8 .
-# - pylint .
+
+after_success:
+  - coveralls
+  - pylint --output-format=html
