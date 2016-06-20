@@ -2,7 +2,9 @@
 
 
 .. image:: https://api.travis-ci.org/ReblochonMasque/sudokuku.svg
-        :target: https://travis-ci.org/ReblochonMasque/sudokuku
+    :target: https://travis-ci.org/ReblochonMasque/sudokuku
+.. image:: https://coveralls.io/repos/github/ReblochonMasque/sudokuku/badge.svg?branch=master
+    :target: https://coveralls.io/github/ReblochonMasque/sudokuku?branch=master
 
 =========================================
 Implementation of a sudoku puzzle solver:
