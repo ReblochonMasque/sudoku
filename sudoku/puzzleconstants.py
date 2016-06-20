@@ -75,7 +75,6 @@ class _PuzzleConstants(object):
         assert size == 9
         self._size = size
         self._digits = ''.join([str(idx) for idx in range(1, 10)])
-        # self._size_root = math.sqrt(self._size)
         self._rows = [chr(ord('A')+_) for _ in range(self._size)]
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
         self._squares = _PuzzleConstants._cross(self._rows, self._cols)
