@@ -34,19 +34,19 @@ class _PuzzleConstants(object):
 
     Units are the lists of squares representing the ROW, COL and BOX of a SQUARE
     Units of Ce (3 lists of 9 = 27)
-                   ROW                             BOX                             COL
+                   ROW                             COL                            BOX
        a  b  c    d  e  f    g  h  i   a  b  c    d  e  f    g  h  i   a  b  c    d  e  f    g  h  i
-    A           |          |                    | Ad Ae Af |                    |    Ae    |
-    B           |          |                    | Bd Be Bf |                    |    Be    |
-    C  Ca Cb Cc | Cd Ce Cf | Cg Ch Ci           | Cd Ce Cf |                    |    Ce    |
-       ---------+----------+---------  ---------+----------+---------  ---------+----------+--------
-    D           |          |                    |          |                    |    De    |
-    E           |          |                    |          |                    |    Ee    |
-    F           |          |                    |          |                    |    Fe    |
-       ---------+----------+---------  ---------+----------+---------  ---------+----------+--------
-    G           |          |                    |          |                    |    Ge    |
-    H           |          |                    |          |                    |    He    |
-    I           |          |                    |          |                    |    Ie    |
+    A           |          |                    |    Ae    |                    | Ad Ae Af |
+    B           |          |                    |    Be    |                    | Bd Be Bf |
+    C  Ca Cb Cc | Cd Ce Cf | Cg Ch Ci           |    Ce    |                    | Cd Ce Cf |
+       ---------+----------+---------  ---------+----------+--------   ---------+----------+--------
+    D           |          |                    |    De    |                    |          |
+    E           |          |                    |    Ee    |                    |          |
+    F           |          |                    |    Fe    |                    |          |
+       ---------+----------+---------  ---------+----------+--------   ---------+----------+--------
+    G           |          |                    |    Ge    |                    |          |
+    H           |          |                    |    He    |                    |          |
+    I           |          |                    |    Ie    |                    |          |
 
     Peers are the set of squares sharing the same UNIT with a SQUARE.
     Every peer must have a different value than the square in reference
@@ -68,9 +68,7 @@ class _PuzzleConstants(object):
 
     def __init__(self, size=9):
         """
-        various sizes not handled
-        @todo: implement different sizes sudoku boards (16/25/36/49/64/81/100)
-        @todo: REFACTOR -> why @property getters don't work?
+        9x9 board sizes are handled (other sizes not)
         """
         assert size == 9
         self._size = size
@@ -88,14 +86,6 @@ class _PuzzleConstants(object):
                        for square in self._squares}
         self._peers = {square: set(sum(self._units[square], [])) - {square}   # set()
                        for square in self._squares}
-
-#        print(self._rows)
-#        print(self._cols)
-#        [print(square, end=' ') for square in self._squares]
-#        print(self._squares)
-#        [print(unit, end=' ') for unit in self._unitlist]
-#        print(self._units)
-#        print(self._peers)
 
     @property
     def digits(self):
@@ -124,7 +114,7 @@ class _PuzzleConstants(object):
         """
         return [a+b for a in seq_a for b in seq_b]
 
-    def output(self, coll):
+    def output(self, squares_coll):
         """pretty prints a collection of square keys
         """
         result = ['   '] + [col + '    '
@@ -133,7 +123,7 @@ class _PuzzleConstants(object):
                             for idx, col in enumerate(self._cols)] + ['\n']
 
         for idx, square in enumerate(self._squares):
-            if square in coll:
+            if square in squares_coll:
                 elt = square
             else:
                 elt = '. '
@@ -156,20 +146,43 @@ class _PuzzleConstants(object):
         return ''.join(result)
 
 
-PUZZLE_C = _PuzzleConstants()
+_PUZZLE_C = _PuzzleConstants()
 # Constants used by other modules
-SQUARES = PUZZLE_C.squares      # an ordered list of every square_key
+SQUARES = _PUZZLE_C.squares     # an ordered list of every square_key
                                 # used to access UNITS, PEERS
 
-UNITS = PUZZLE_C.units          # a dictionary containing the access keys for the rows, cols & boxes
+UNITS = _PUZZLE_C.units         # a dictionary containing the access keys for the rows, cols & boxes
                                 # of a square {'square_key' : [[square_keys for row],
                                 #                              [square_keys for col],
                                 #                              [square_keys for box]]}
 
-PEERS = PUZZLE_C.peers          # a dictionary containing the access keys for the peers
+PEERS = _PUZZLE_C.peers         # a dictionary containing the access keys for the peers
                                 # {'square_key': [peers]}
 
-DIGITS = PUZZLE_C.digits        # legal values for a solved square '123456789'
+DIGITS = _PUZZLE_C.digits       # legal values for a solved square '123456789'
+
+VALUE_TO_POSSIBLE_VALUE = {'.': '123456789',
+                           '0': '123456789',
+                           '1': '1........',
+                           '2': '.2.......',
+                           '3': '..3......',
+                           '4': '...4.....',
+                           '5': '....5....',
+                           '6': '.....6...',
+                           '7': '......7..',
+                           '8': '.......8.',
+                           '9': '........9'}
+
+POSSIBLE_VALUE_TO_VALUE = {'123456789': '.',
+                           '1........': '1',
+                           '.2.......': '2',
+                           '..3......': '3',
+                           '...4.....': '4',
+                           '....5....': '5',
+                           '.....6...': '6',
+                           '......7..': '7',
+                           '.......8.': '8',
+                           '........9': '9'}
 
 
 # if __name__ == '__main__':
