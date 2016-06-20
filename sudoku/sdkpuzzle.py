@@ -17,8 +17,7 @@ Created on Wed Jun  1 15:27:23 2016
 #             {'square_key': [peers]}
 # DIGITS  --> legal values for a solved square '123456789'
 
-from sudoku.puzzleconstants import SQUARES, UNITS, PEERS, DIGITS
-# TODO: resolve import reference for coverage runs
+import sudoku.puzzleconstants as pc
 
 
 class Puzzle(object):
@@ -52,28 +51,21 @@ class Puzzle(object):
 
     def __init__(self):
         self._grid = None
-        self._possible_values = {square: DIGITS for square in SQUARES}
+        self._possible_values = {square: pc.DIGITS for square in pc.SQUARES}
 
     @property
     def possible_values(self):
+        """getter"""
         return self._possible_values
 
     def parse_grid(self):
         """
-        assigns possible values to self._possible_values according to the values in self._grid
+        assigns possible values to self._possible_values according
+        to the values in self._grid
         """
         for square, value in self._grid.items():
             if value not in '.0':
                 self._possible_values[square] = Puzzle.VALUE_TO_POSSIBLE_VALUE[value]
-
-    # def filter_remaining_possible_values(self):
-    #     """
-    #     from a dictionary of all possible values {square: digits},
-    #     uses a grid to build a dictionary of possible values {square: possible_digits}
-    #     :return: --> mutates self._possible_values
-    #     """
-    #     for square in SQUARES:
-    #         if
 
     def from_string(self, chars):
         """
@@ -81,10 +73,10 @@ class Puzzle(object):
         :return: a sudoku grid build from the input values and checked for validity
                  but not for uniqueness of solution
         """
-        if len(chars) != len(SQUARES):
+        if len(chars) != len(pc.SQUARES):
             raise ValueError('Parameter string length is wrong')
         else:
-            self._grid = {key: value for key, value in zip(SQUARES, chars)}
+            self._grid = {key: value for key, value in zip(pc.SQUARES, chars)}
         return self
 
     def is_valid_grid(self) -> bool:
@@ -99,13 +91,13 @@ class Puzzle(object):
         :return: True if is valid, False otherwise
         """
         # TODO: Change to lazy evaluation
-        # TODO: Refactor (checking PEERS is redundant)
+        # TODO: Refactor (checking PEERS is likely redundant)
         result = True
         result &= self._contains_all_keys()
         result &= self._are_values_legal()
-        for square in SQUARES:
-            result &= self._is_unique_in_block(self._grid[square], PEERS[square])
-            for block in UNITS[square]:
+        for square in pc.SQUARES:
+            result &= self._is_unique_in_block(self._grid[square], pc.PEERS[square])
+            for block in pc.UNITS[square]:
                 result &= self._is_unique_in_block(self._grid[square], block)
         return result
 
@@ -118,7 +110,7 @@ class Puzzle(object):
         """
         seen = 0
         for square in block:
-            if self._grid[square] in DIGITS and self._grid[square] == value:
+            if self._grid[square] in pc.DIGITS and self._grid[square] == value:
                 seen += 1
         return seen <= 1
 
@@ -127,7 +119,7 @@ class Puzzle(object):
         checks that all values in self._grid are legal (in DIGITS or '0.')
         :return: True if all values are legal, False otherwise
         """
-        return all([value in DIGITS or value in '0.' for value in self._grid.values()])
+        return all([value in pc.DIGITS or value in '0.' for value in self._grid.values()])
 
     def _contains_all_keys(self) -> bool:
         """
@@ -135,7 +127,7 @@ class Puzzle(object):
         :return: True if self_grid contains all keys and not more, False otherwise
         """
         temp = sorted(list(self._grid.keys()))
-        return temp == SQUARES and len(temp) == len(SQUARES)
+        return temp == pc.SQUARES and len(temp) == len(pc.SQUARES)
 
     def __str__(self):
         result = '   '
@@ -167,7 +159,7 @@ def make_grid_from_string(values):
     ignores everything else
     """
     _grid = Puzzle()
-    chars = [char for char in values if char in DIGITS or char in '0.']
+    chars = [char for char in values if char in pc.DIGITS or char in '0.']
     assert len(chars) == 81, "the grid has an incorrect size"
     return _grid.from_string(chars)
 

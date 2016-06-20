@@ -100,18 +100,22 @@ class _PuzzleConstants(object):
 
     @property
     def digits(self):
+        """getter"""
         return self._digits
 
     @property
     def squares(self):
+        """getter"""
         return self._squares
 
     @property
     def units(self):
+        """getter"""
         return self._units
 
     @property
     def peers(self):
+        """getter"""
         return self._peers
 
     @staticmethod
@@ -152,21 +156,20 @@ class _PuzzleConstants(object):
         return ''.join(result)
 
 
-# TODO: REFACTOR private attribute access
-_puzzle_ = _PuzzleConstants()
+PUZZLE_C = _PuzzleConstants()
 # Constants used by other modules
-SQUARES = _puzzle_.squares      # an ordered list of every square_key
+SQUARES = PUZZLE_C.squares      # an ordered list of every square_key
                                 # used to access UNITS, PEERS
 
-UNITS = _puzzle_.units          # a dictionary containing the access keys for the rows, cols & boxes
+UNITS = PUZZLE_C.units          # a dictionary containing the access keys for the rows, cols & boxes
                                 # of a square {'square_key' : [[square_keys for row],
                                 #                              [square_keys for col],
                                 #                              [square_keys for box]]}
 
-PEERS = _puzzle_.peers          # a dictionary containing the access keys for the peers
+PEERS = PUZZLE_C.peers          # a dictionary containing the access keys for the peers
                                 # {'square_key': [peers]}
 
-DIGITS = _puzzle_.digits        # legal values for a solved square '123456789'
+DIGITS = PUZZLE_C.digits        # legal values for a solved square '123456789'
 
 
 
