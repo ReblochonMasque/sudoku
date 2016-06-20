@@ -124,6 +124,25 @@ class Puzzle(object):
         # print(result)
         return result
 
+    def print_puzzle(self):
+        """
+        returns a string to print a puzzle
+        :return: a string that represents a puzzle
+        """
+        result = '  a b c d e f g h i\n'
+        for row, char1 in enumerate('ABCDEFGHI'):
+            result += char1 + ' '
+            for col, char2 in enumerate('abcdefghi'):
+                result += self._grid[char1 + char2]
+                if (col + 1) % 3 != 0:
+                    result += ' '
+                elif (col + 1) < 9:
+                    result += '|'
+            result += '\n'
+            if(row + 1) % 3 == 0 and (row + 1) < 9:
+                result += '  -----+-----+-----\n'
+        return result
+
 # @TODO: make a grid of values
 # @TODO: add a __str__ for self._possible_values
 
@@ -144,6 +163,13 @@ def make_grid_from_string(values):
 #
 #     grid = make_grid_from_string(''.join(['.'] * 81))
 #     print(grid)
+#     print(grid.print_puzzle())
+#
+#     grid_string =
+#     '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+#     grid2 = make_grid_from_string(grid_string)
+#     print(grid2)
+#     print(grid2.print_puzzle())
 #     grid.is_valid_grid()
 #     grid = make_grid_from_string(''.join(['123456789'] * 9))
 #     print(grid)

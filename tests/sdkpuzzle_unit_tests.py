@@ -257,6 +257,26 @@ I | 123456789  123456789  123456789 | 123456789  123456789  123456789 | 12345678
         result = str(self.valid_grid_0)
         self.assertEqual(result, expected)
 
+    def test_print_puzzle(self):
+        """
+        tests that print_puzzle returns the proper string
+        """
+        expected = """  a b c d e f g h i
+A 4 . .|. . .|8 . 5
+B . 3 .|. . .|. . .
+C . . .|7 . .|. . .
+  -----+-----+-----
+D . 2 .|. . .|. 6 .
+E . . .|. 8 .|4 . .
+F . . .|. 1 .|. . .
+  -----+-----+-----
+G . . .|6 . 3|. 7 .
+H 5 . .|2 . .|. . .
+I 1 . 4|. . .|. . .
+"""
+        result = self.valid_grid_0.print_puzzle()
+        self.assertEqual(result, expected)
+
     # --- BASIC TESTS FOR GRID CLASS FORMATION -------------------------------------
 
     def test_grid_instance(self):
