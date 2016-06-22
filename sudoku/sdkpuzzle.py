@@ -4,7 +4,6 @@ sdkpuzzle.py
 sudoku solver
 Created on Wed Jun  1 15:27:23 2016
 
-@author: fredericdupont
 """
 
 # # Constants used
@@ -17,7 +16,12 @@ Created on Wed Jun  1 15:27:23 2016
 #             {'square_key': [peers]}
 # DIGITS  --> legal values for a solved square '123456789'
 
-import sudoku.puzzleconstants as p_const
+
+__author__ = 'Fred Dupont'
+
+
+from . import puzzleconstants as p_const
+# import sudoku.puzzleconstants as p_const
 
 
 class Puzzle(object):

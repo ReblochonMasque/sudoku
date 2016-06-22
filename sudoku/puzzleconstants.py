@@ -3,8 +3,11 @@
 puzzleconstants.py
 Sudoku board representation - keys and addresses
 Created on Mon May 30 17:00:20 2016
-@author: fredericdupont
 """
+
+
+__author__ = 'Fred Dupont'
+
 
 import math
 
