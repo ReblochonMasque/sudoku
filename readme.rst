@@ -5,6 +5,9 @@
     :target: https://travis-ci.org/ReblochonMasque/sudoku
 .. image:: https://coveralls.io/repos/github/ReblochonMasque/sudoku/badge.svg
     :target: https://coveralls.io/github/ReblochonMasque/sudoku
+    
+.. image:: https://coveralls.io/repos/github/ReblochonMasque/sudoku/badge.svg?branch=master 
+    :target: https://coveralls.io/github/ReblochonMasque/sudoku?branch=master
 
 =========================================
 Implementation of a sudoku puzzle solver:
