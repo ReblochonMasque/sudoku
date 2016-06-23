@@ -1,10 +1,10 @@
 ### **W. I. P.**
 
 
-.. image:: https://api.travis-ci.org/ReblochonMasque/sudokuku.svg
-    :target: https://travis-ci.org/ReblochonMasque/sudokuku
-.. image:: https://coveralls.io/repos/github/ReblochonMasque/sudokuku/badge.svg?branch=master
-    :target: https://coveralls.io/github/ReblochonMasque/sudokuku?branch=master
+.. image:: https://api.travis-ci.org/ReblochonMasque/sudoku.svg
+    :target: https://travis-ci.org/ReblochonMasque/sudoku
+.. image:: https://coveralls.io/repos/github/ReblochonMasque/sudoku/badge.svg
+    :target: https://coveralls.io/github/ReblochonMasque/sudoku
 
 =========================================
 Implementation of a sudoku puzzle solver:
