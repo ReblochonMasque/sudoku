@@ -12,7 +12,7 @@ __author__ = 'Fred Dupont'
 import math
 
 
-class _PuzzleConstants(object):
+class PuzzleConstants(object):
     """
     represents a sudoku board with rows in CAPITAL and cols in lower case, and
     provides the data structures and access keys to manipulate it
@@ -20,7 +20,7 @@ class _PuzzleConstants(object):
             --> rows are A to I
             --> cols are a to i
 
-    _PuzzleConstants repr:
+    PuzzleConstants repr:
        a  b  c    d  e  f    g  h  i
     A  Aa Ab Ac | Ad Ae Af | Ag Ah Ai
     B  Ba Bb Bc | Bd Be Bf | Bg Bh Bi
@@ -78,11 +78,11 @@ class _PuzzleConstants(object):
         self._digits = ''.join([str(idx) for idx in range(1, 10)])
         self._rows = [chr(ord('A')+_) for _ in range(self._size)]
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
-        self._squares = _PuzzleConstants._cross(self._rows, self._cols)
+        self._squares = PuzzleConstants._cross(self._rows, self._cols)
 
-        self._unitlist = [_PuzzleConstants._cross(self._rows, col) for col in self._cols] + \
-                         [_PuzzleConstants._cross(row, self._cols) for row in self._rows] + \
-                         [_PuzzleConstants._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
+        self._unitlist = [PuzzleConstants._cross(self._rows, col) for col in self._cols] + \
+                         [PuzzleConstants._cross(row, self._cols) for row in self._rows] + \
+                         [PuzzleConstants._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
                           for col in ('abc', 'def', 'ghi')]
 
         self._units = {square: [unit for unit in self._unitlist if square in unit]
@@ -149,7 +149,7 @@ class _PuzzleConstants(object):
         return ''.join(result)
 
 
-_PUZZLE_C = _PuzzleConstants()
+_PUZZLE_C = PuzzleConstants()
 # Constants used by other modules
 SQUARES = _PUZZLE_C.squares     # an ordered list of every square_key
                                 # used to access UNITS, PEERS
@@ -191,7 +191,7 @@ POSSIBLE_VALUE_TO_VALUE = {'123456789': '.',
 # if __name__ == '__main__':
 #    pass
 
-    # _puzzle = _PuzzleConstants()
+    # _puzzle = PuzzleConstants()
     # print(_puzzle.output(SQUARES))
     # for squ in SQUARES[65:]:
     #     print(_puzzle.output(PEERS[squ]))

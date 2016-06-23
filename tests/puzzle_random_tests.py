@@ -12,8 +12,8 @@ __author__ = 'Frederic Dupont'
 import random
 import unittest
 
-from sudoku.sdkpuzzle import make_grid_from_string
-from tests import test_data
+from sudoku.puzzle import make_grid_from_string
+from tests import get_test_data
 
 
 class TestFromDataPuzzlesRandomized(unittest.TestCase):
@@ -32,42 +32,42 @@ class TestFromDataPuzzlesRandomized(unittest.TestCase):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        valid_solved_data = test_data.get_data_from(self.path + 'solved_10000_grids_startwith_123456789.txt')
+        valid_solved_data = get_test_data.get_data_from(self.path + 'solved_10000_grids_startwith_123456789.txt')
         self._run_random_data_against_expected(valid_solved_data, len(valid_solved_data))
 
     def test_valid_unsolved_puzzle_45_numbers(self):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        valid_unsolved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_45_numbers.txt')
+        valid_unsolved_data = get_test_data.get_data_from(self.path + 'unsolved_10000_grids_45_numbers.txt')
         self._run_random_data_against_expected(valid_unsolved_data, len(valid_unsolved_data))
 
     def test_valid_unsolved_puzzle_40_numbers(self):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        valid_unsolved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_40_numbers.txt')
+        valid_unsolved_data = get_test_data.get_data_from(self.path + 'unsolved_10000_grids_40_numbers.txt')
         self._run_random_data_against_expected(valid_unsolved_data, len(valid_unsolved_data))
 
     def test_valid_unsolved_puzzle_35_numbers(self):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        valid_unsolved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_35_numbers.txt')
+        valid_unsolved_data = get_test_data.get_data_from(self.path + 'unsolved_10000_grids_35_numbers.txt')
         self._run_random_data_against_expected(valid_unsolved_data, len(valid_unsolved_data))
 
     def test_valid_unsolved_puzzle_30_numbers(self):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        valid_unsolved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_30_numbers.txt')
+        valid_unsolved_data = get_test_data.get_data_from(self.path + 'unsolved_10000_grids_30_numbers.txt')
         self._run_random_data_against_expected(valid_unsolved_data, len(valid_unsolved_data))
 
     def test_valid_unsolved_puzzle_25_numbers(self):
         """
         uses the solved grids read from a file to test the testing of a valid grid
         """
-        valid_unsolved_data = test_data.get_data_from(self.path + 'unsolved_10000_grids_25_numbers.txt')
+        valid_unsolved_data = get_test_data.get_data_from(self.path + 'unsolved_10000_grids_25_numbers.txt')
         self._run_random_data_against_expected(valid_unsolved_data, len(valid_unsolved_data))
 
     def _run_random_data_against_expected(self, data, num_tests):

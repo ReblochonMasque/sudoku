@@ -11,7 +11,7 @@ Created on Mon May 30 17:01:26 2016
 
 import unittest
 
-from sudoku.puzzleconstants import _PuzzleConstants
+from sudoku.puzzleconstants import PuzzleConstants
 
 
 class TestPuzzleConstants(unittest.TestCase):
@@ -20,8 +20,8 @@ class TestPuzzleConstants(unittest.TestCase):
         """
         Boards of size=9: board1, board2
         """
-        self.board1 = _PuzzleConstants()
-        self.board2 = _PuzzleConstants(9)
+        self.board1 = PuzzleConstants()
+        self.board2 = PuzzleConstants(9)
         self.square_reference = ['Aa', 'Ab', 'Ac', 'Ad', 'Ae', 'Af', 'Ag', 'Ah', 'Ai',
                                  'Ba', 'Bb', 'Bc', 'Bd', 'Be', 'Bf', 'Bg', 'Bh', 'Bi',
                                  'Ca', 'Cb', 'Cc', 'Cd', 'Ce', 'Cf', 'Cg', 'Ch', 'Ci',
@@ -41,12 +41,12 @@ class TestPuzzleConstants(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_an_object_Board_is_created(self):
-        board_1 = _PuzzleConstants()
-        self.assertIsInstance(board_1, _PuzzleConstants)
-        board_2 = _PuzzleConstants(9)
-        self.assertIsInstance(board_2, _PuzzleConstants)
-        self.assertIsInstance(self.board1, _PuzzleConstants)
-        self.assertIsInstance(self.board2, _PuzzleConstants)
+        board_1 = PuzzleConstants()
+        self.assertIsInstance(board_1, PuzzleConstants)
+        board_2 = PuzzleConstants(9)
+        self.assertIsInstance(board_2, PuzzleConstants)
+        self.assertIsInstance(self.board1, PuzzleConstants)
+        self.assertIsInstance(self.board2, PuzzleConstants)
 
     def test_ROWS(self):
         """do ROWS contain the proper values
@@ -294,7 +294,7 @@ G  .  .  .  | Gd .  .  | .  .  .  \n\
 H  .  .  .  | Hd .  .  | .  .  .  \n\
 I  .  .  .  | Id .  .  | .  .  .  \n\n"""
 
-        _puzzle = _PuzzleConstants()
+        _puzzle = PuzzleConstants()
         peers_Bd = {'Hd', 'Be', 'Bh', 'Bg', 'Id', 'Bf', 'Bb', 'Ba', 'Ce', 'Cf', 'Ed', 'Bc', 'Cd', 'Gd', 'Bi', 'Af', 'Ad', 'Dd', 'Fd', 'Ae'}
 
         result = _puzzle.output(peers_Bd)
@@ -304,8 +304,8 @@ I  .  .  .  | Id .  .  | .  .  .  \n\n"""
 #    def test_various_board_sizes(self):
 #        """Not implemented - must revert to a 9x9 board
 #        """
-#        board = _PuzzleConstants(16)
-#        self.assertIsInstance(board, _PuzzleConstants)
+#        board = PuzzleConstants(16)
+#        self.assertIsInstance(board, PuzzleConstants)
 
 
 if __name__ == '__main__':

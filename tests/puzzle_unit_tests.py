@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-sdkpuzzle_unit_tests.py
+puzzle_unit_tests.py
 Unit Tests for sdksolver
 
 Created on Wed Jun  1 15:30:52 2016
@@ -10,7 +10,7 @@ Created on Wed Jun  1 15:30:52 2016
 
 import unittest
 
-from sudoku.sdkpuzzle import Puzzle, make_grid_from_string
+from sudoku.puzzle import Puzzle, make_grid_from_string
 
 from sudoku.puzzleconstants import DIGITS, SQUARES
 

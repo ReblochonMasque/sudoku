@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-sdkpuzzle.py
+puzzle.py
 sudoku solver
 Created on Wed Jun  1 15:27:23 2016
 
