@@ -38,6 +38,21 @@ class Puzzle(object):
         """getter"""
         return self._candidates
 
+    @property
+    def grid(self):
+        """getter"""
+        return self._grid
+
+    def clone(self):
+        """
+        makes a clone of the puzzle
+        :return: a Puzzle object, clone of self
+        """
+        cloned_puzzle =  make_grid_from_string(self.print_puzzle())
+        assert cloned_puzzle.is_valid_grid()
+        cloned_puzzle.parse_grid_candidates()
+        return cloned_puzzle
+
     def parse_grid_candidates(self):
         """
         assigns candidates to self._candidates according

@@ -235,6 +235,24 @@ class TestPuzzle(unittest.TestCase):
         result = self.valid_grid_0.candidates.values()
         self.assertTrue(all(res == DIGITS for res in result))
 
+    def test_clone_0(self):
+        """tests that the formation of a clone returns
+        --> a distinct Puzzle object
+        --> whose _grid and _candidates contain the exact same key: values pairs as the original
+        """
+        self.valid_grid_0.parse_grid_candidates()
+        expected_grid = {k: v for k, v in self.valid_grid_0.grid.items()}
+        expected_candidates = {k: v for k, v in self.valid_grid_0.candidates.items()}
+        cloned_puzzle = self.valid_grid_0.clone()
+        self.assertIsInstance(cloned_puzzle, Puzzle)
+        self.assertIsNot(cloned_puzzle, self.valid_grid_0)
+        self.assertEqual(sorted(cloned_puzzle.grid.keys()), sorted(expected_grid.keys()))
+        self.assertTrue(all(cloned_puzzle.grid[square] == expected_grid[square] for square in SQUARES))
+        self.assertTrue(all(cloned_puzzle.candidates[square] == expected_candidates[square] for square in SQUARES))
+
+
+
+
     def test_print_output(self):
         """
         tests that __str__ returns the proper string
