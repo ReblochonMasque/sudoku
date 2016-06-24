@@ -13,7 +13,7 @@ Implementation of a sudoku puzzle solver:
 
 - uses a mix of strategies with constraint propagation and search with backtracking.
 - inspired from Peter Norvig's early article: `Solving Every Sudoku Puzzle <http://norvig.com/sudoku.html>`_
-- related to Udacity [Software Testing `Course <https://www.udacity.com/wiki/cs258>`_
+- related to Udacity Software Testing `Course <https://www.udacity.com/wiki/cs258>`_
 
 ======================
 Learning Goals are to:
