@@ -146,8 +146,8 @@ class TestPuzzle(unittest.TestCase):
                                 'Bh': '123456789', 'Ce': '123456789', 'Ag': '123456789', 'Dc': '123456789',
                                 'Ii': '123456789', 'Ec': '123456789', 'Ca': '123456789', 'Fh': '123456789',
                                 'Be': '123456789'}
-        valid_grid_w_1_in_Aa.parse_grid()
-        result = valid_grid_w_1_in_Aa.possible_values
+        valid_grid_w_1_in_Aa.parse_grid_candidates()
+        result = valid_grid_w_1_in_Aa.candidates
 
         self.assertEqual(result.keys(), self._all_possible_values.keys())
         self.assertTrue(all(result[square] == _exp_possible_values[square]
@@ -181,8 +181,8 @@ class TestPuzzle(unittest.TestCase):
                                 'Bh': '123456789', 'Ce': '123456789', 'Ag': '.......8.', 'Dc': '123456789',
                                 'Ii': '123456789', 'Ec': '123456789', 'Ca': '123456789', 'Fh': '123456789',
                                 'Be': '123456789'}
-        self.valid_grid_0.parse_grid()
-        result = self.valid_grid_0.possible_values
+        self.valid_grid_0.parse_grid_candidates()
+        result = self.valid_grid_0.candidates
         self.assertEqual(result.keys(), self._all_possible_values.keys())
         self.assertTrue(all(result[square] == _exp_possible_values[square]
                             for square in SQUARES))
@@ -226,13 +226,13 @@ class TestPuzzle(unittest.TestCase):
     def test_values_keys_match_grid_keys(self):
         """tests that the keys of _grid and _values are the same
         """
-        result = self.valid_grid_0.possible_values
+        result = self.valid_grid_0.candidates
         self.assertEqual(result.keys(), self._all_possible_values.keys())
 
     def test_values_in_possible_values_match_digits(self):
         """tests that the keys of _grid and _values are the same
         """
-        result = self.valid_grid_0.possible_values.values()
+        result = self.valid_grid_0.candidates.values()
         self.assertTrue(all(res == DIGITS for res in result))
 
     def test_print_output(self):

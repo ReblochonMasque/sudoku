@@ -31,21 +31,21 @@ class Puzzle(object):
 
     def __init__(self):
         self._grid = None
-        self._possible_values = {square: p_const.DIGITS for square in p_const.SQUARES}
+        self._candidates = {square: p_const.DIGITS for square in p_const.SQUARES}
 
     @property
-    def possible_values(self):
+    def candidates(self):
         """getter"""
-        return self._possible_values
+        return self._candidates
 
-    def parse_grid(self):
+    def parse_grid_candidates(self):
         """
-        assigns possible values to self._possible_values according
+        assigns candidates to self._candidates according
         to the values in self._grid
         """
         for square, value in self._grid.items():
             if value not in '.0':
-                self._possible_values[square] = p_const.VALUE_TO_POSSIBLE_VALUE[value]
+                self._candidates[square] = p_const.VALUE_TO_CANDIDATES[value]
 
     def from_string(self, chars):
         """
@@ -119,7 +119,7 @@ class Puzzle(object):
         for row, char1 in enumerate('ABCDEFGHI'):
             result += char1 + ' |'
             for col, char2 in enumerate('abcdefghi'):
-                result += ' ' + self._possible_values[char1 + char2] + ' '
+                result += ' ' + self._candidates[char1 + char2] + ' '
                 if (col + 1) % 3 == 0:
                     result += '|'
             result += '\n'
