@@ -80,12 +80,12 @@ class PuzzleConstants(object):
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
         self._squares = PuzzleConstants._cross(self._rows, self._cols)
 
-        self._unitlist = [PuzzleConstants._cross(self._rows, col) for col in self._cols] + \
-                         [PuzzleConstants._cross(row, self._cols) for row in self._rows] + \
-                         [PuzzleConstants._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
-                          for col in ('abc', 'def', 'ghi')]
+        _unitlist = [PuzzleConstants._cross(self._rows, col) for col in self._cols] + \
+                    [PuzzleConstants._cross(row, self._cols) for row in self._rows] + \
+                    [PuzzleConstants._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
+                     for col in ('abc', 'def', 'ghi')]
 
-        self._units = {square: [unit for unit in self._unitlist if square in unit]
+        self._units = {square: [unit for unit in _unitlist if square in unit]
                        for square in self._squares}
         self._peers = {square: set(sum(self._units[square], [])) - {square}   # set()
                        for square in self._squares}
