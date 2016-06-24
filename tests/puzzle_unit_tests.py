@@ -125,7 +125,7 @@ class TestPuzzle(unittest.TestCase):
         valid_grid_w_1_in_Aa = make_grid_from_string(grid_chars_w_1_in_Aa)
         is_valid = valid_grid_w_1_in_Aa.is_valid_grid()
         self.assertTrue(is_valid)
-        _exp_possible_values = {'Gh': '123456789', 'Fe': '123456789', 'Ab': '123456789', 'Db': '123456789',
+        _expected_candidates = {'Gh': '123456789', 'Fe': '123456789', 'Ab': '123456789', 'Db': '123456789',
                                 'Ei': '123456789', 'Ba': '123456789', 'Ac': '123456789', 'Eh': '123456789',
                                 'Ih': '123456789', 'He': '123456789', 'Eg': '123456789', 'Hd': '123456789',
                                 'Bi': '123456789', 'Cg': '123456789', 'Cc': '123456789', 'Hi': '123456789',
@@ -150,7 +150,7 @@ class TestPuzzle(unittest.TestCase):
         result = valid_grid_w_1_in_Aa.candidates
 
         self.assertEqual(result.keys(), self._all_possible_values.keys())
-        self.assertTrue(all(result[square] == _exp_possible_values[square]
+        self.assertTrue(all(result[square] == _expected_candidates[square]
                             for square in SQUARES))
 
     def test_parse_grid_0(self):
@@ -160,7 +160,7 @@ class TestPuzzle(unittest.TestCase):
         valid_grid_0_chars = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
                         #    'abcdefghiabcdefghiabcdefghiabcdefghiabcdefghiabcdefghiabcdefghiabcdefghiabcdefghi'
                         #    '    A        B        C        D        E        F        G        H        I    '
-        _exp_possible_values = {'Gh': '......7..', 'Fe': '1........', 'Ab': '123456789', 'Db': '.2.......',
+        _expected_candidates = {'Gh': '......7..', 'Fe': '1........', 'Ab': '123456789', 'Db': '.2.......',
                                 'Ei': '123456789', 'Ba': '123456789', 'Ac': '123456789', 'Eh': '123456789',
                                 'Ih': '123456789', 'He': '123456789', 'Eg': '...4.....', 'Hd': '.2.......',
                                 'Bi': '123456789', 'Cg': '123456789', 'Cc': '123456789', 'Hi': '123456789',
@@ -184,7 +184,7 @@ class TestPuzzle(unittest.TestCase):
         self.valid_grid_0.parse_grid_candidates()
         result = self.valid_grid_0.candidates
         self.assertEqual(result.keys(), self._all_possible_values.keys())
-        self.assertTrue(all(result[square] == _exp_possible_values[square]
+        self.assertTrue(all(result[square] == _expected_candidates[square]
                             for square in SQUARES))
 
     # def test_filter_remaining_possible_values_1(self):
