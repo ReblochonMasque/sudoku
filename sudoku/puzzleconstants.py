@@ -80,12 +80,12 @@ class PuzzleConstants(object):
         self._cols = [chr(ord('a')+_) for _ in range(self._size)]
         self._squares = PuzzleConstants._cross(self._rows, self._cols)
 
-        _unitlist = [PuzzleConstants._cross(self._rows, col) for col in self._cols] + \
+        self._unitlists = [PuzzleConstants._cross(self._rows, col) for col in self._cols] + \
                     [PuzzleConstants._cross(row, self._cols) for row in self._rows] + \
                     [PuzzleConstants._cross(row, col) for row in ('ABC', 'DEF', 'GHI')
                      for col in ('abc', 'def', 'ghi')]
 
-        self._units = {square: [unit for unit in _unitlist if square in unit]
+        self._units = {square: [unit for unit in self._unitlists if square in unit]
                        for square in self._squares}
         self._peers = {square: set(sum(self._units[square], [])) - {square}   # set()
                        for square in self._squares}
@@ -109,6 +109,12 @@ class PuzzleConstants(object):
     def peers(self):
         """getter"""
         return self._peers
+
+    @property
+    def unitlists(self):
+        """getter"""
+        return self._unitlists
+    # @TODO: add unit test for line 116
 
     @staticmethod
     def _cross(seq_a, seq_b):
@@ -151,6 +157,10 @@ class PuzzleConstants(object):
 
 _PUZZLE_C = PuzzleConstants()
 # Constants used by other modules
+
+UNIT_LISTS = _PUZZLE_C._unitlists   # a list of all the units
+                                    # a unit is a list of squares that form a ROW, COL or BOX
+
 SQUARES = _PUZZLE_C.squares     # an ordered list of every square_key
                                 # used to access UNITS, PEERS
 
