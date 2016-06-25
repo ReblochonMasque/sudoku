@@ -152,7 +152,10 @@ class Puzzle(object):
         for row, char1 in enumerate('ABCDEFGHI'):
             result += char1 + ' '
             for col, char2 in enumerate('abcdefghi'):
-                result += self._grid[char1 + char2]
+                res = self._grid[char1 + char2]
+                if res == '0':
+                    res = '.'
+                result += res
                 if (col + 1) % 3 != 0:
                     result += ' '
                 elif (col + 1) < 9:
