@@ -39,6 +39,19 @@ class PuzzleSolver(object):
         # print('print(self._puzzle) AFTER \n', self._puzzle)
         # print(self._puzzle.print_puzzle())
 
+    def propagate(self):
+        """if a UNIT has only one possible place for a value,
+         assign this value there, and adjust the candidates for this place
+        """
+        for unit in p_const.UNIT_LISTS:
+            for digit in p_const.DIGITS:
+                result = []
+                for square in unit:
+                    if digit in self._puzzle.candidates[square]:
+                        result.append(square)
+                if len(result) == 1:
+                    self._puzzle.grid[result[0]] = digit
+                    self._puzzle.candidates[result[0]] = p_const.VALUE_TO_CANDIDATES[digit]
 
 
 
@@ -48,29 +61,28 @@ class PuzzleSolver(object):
 
 
 
+def main(argv):
+    grid_string = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+    # grid_string = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
+    # grid_string = '003020600900305001001806400008102900700000008006708200002609500800203009005010300'
+    # grid_string = '.82...59....8.1..3..52...78...37842...........27945...91...68..2..7.9....73...95.'
+    # grid_string = '437...189.6.183.......9.536.73..1...9..4.7..1...5..69.124.7.......645.1.356...974'
+    grid2 = make_grid_from_string(grid_string)
+    grid2.parse_grid_candidates()
+    print(grid2)
+    print(grid2.print_puzzle())
+    solver = PuzzleSolver(grid2.clone())
+
+    for idx in range(1):
+        print('step = ', idx, '\n')
+
+        solver.eliminate_candidates()
+        print(solver._puzzle)
+        print(solver._puzzle.print_puzzle())
+        solver.propagate()
+        print(solver._puzzle)
+        print(solver._puzzle.print_puzzle())
 
 
-
-# def main(argv):
-#     grid_string = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-#     # grid_string = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
-#     # grid_string = '003020600900305001001806400008102900700000008006708200002609500800203009005010300'
-#     # grid_string = '.82...59....8.1..3..52...78...37842...........27945...91...68..2..7.9....73...95.'
-#     # grid_string = '437...189.6.183.......9.536.73..1...9..4.7..1...5..69.124.7.......645.1.356...974'
-#     grid2 = make_grid_from_string(grid_string)
-#     grid2.parse_grid_candidates()
-#     print(grid2)
-#     print(grid2.print_puzzle())
-#     solver = PuzzleSolver(grid2.clone())
-#
-#     for idx in range(1):
-#         print('step = ', idx, '\n')
-#         print(solver._puzzle)
-#         print(solver._puzzle.print_puzzle())
-#         solver.eliminate_candidates()
-#         print(solver._puzzle)
-#         print(solver._puzzle.print_puzzle())
-#
-#
-# if __name__ == '__main__':
-#     sys.exit(main(sys.argv))
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
