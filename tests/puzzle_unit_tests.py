@@ -46,7 +46,7 @@ class TestPuzzle(unittest.TestCase):
     def test_is_valid_grid_0(self):
         """ tests is a valid grid is valid
         """
-        result = self.valid_grid_0.is_valid_grid()
+        result = self.valid_grid_0.is_valid()
         self.assertTrue(result)
 
     # TODO: refactor with context manager?
@@ -85,7 +85,7 @@ class TestPuzzle(unittest.TestCase):
         """
         invalid_grid_chars = 'z.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         invalid_grid = Puzzle().from_string(invalid_grid_chars)
-        invalid_result = invalid_grid.is_valid_grid()
+        invalid_result = invalid_grid.is_valid()
         self.assertFalse(invalid_result)
 
     def test_non_uniques_in_rows(self):
@@ -94,7 +94,7 @@ class TestPuzzle(unittest.TestCase):
         chars_repeats_in_row = '4..4..8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         #                       ^  ^
         invalid_grid = Puzzle().from_string(chars_repeats_in_row)
-        invalid_result = invalid_grid.is_valid_grid()
+        invalid_result = invalid_grid.is_valid()
         self.assertFalse(invalid_result)
 
     def test_non_uniques_in_cols(self):
@@ -103,7 +103,7 @@ class TestPuzzle(unittest.TestCase):
         chars_repeats_in_col = '4.....8.5.3..........7.....42.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         #                       ^                          ^
         invalid_grid = Puzzle().from_string(chars_repeats_in_col)
-        invalid_result = invalid_grid.is_valid_grid()
+        invalid_result = invalid_grid.is_valid()
         self.assertFalse(invalid_result)
 
     def test_non_uniques_in_boxes(self):
@@ -112,7 +112,7 @@ class TestPuzzle(unittest.TestCase):
         chars_repeats_in_box = '4.....8.543..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
         #                       ^        ^
         invalid_grid = Puzzle().from_string(chars_repeats_in_box)
-        invalid_result = invalid_grid.is_valid_grid()
+        invalid_result = invalid_grid.is_valid()
         self.assertFalse(invalid_result)
 
     # --- BASIC TESTS FOR VALUES -------------------------------------
@@ -123,7 +123,7 @@ class TestPuzzle(unittest.TestCase):
         """
         grid_chars_w_1_in_Aa = '1................................................................................'
         valid_grid_w_1_in_Aa = make_grid_from_string(grid_chars_w_1_in_Aa)
-        is_valid = valid_grid_w_1_in_Aa.is_valid_grid()
+        is_valid = valid_grid_w_1_in_Aa.is_valid()
         self.assertTrue(is_valid)
         _expected_candidates = {'Gh': '123456789', 'Fe': '123456789', 'Ab': '123456789', 'Db': '123456789',
                                 'Ei': '123456789', 'Ba': '123456789', 'Ac': '123456789', 'Eh': '123456789',

@@ -77,7 +77,7 @@ class TestFromDataPuzzlesRandomized(unittest.TestCase):
                 continue
             else:
                 puzzle = make_grid_from_string(data[idx])
-                result = puzzle.is_valid_grid()
+                result = puzzle.is_valid()
                 self.assertTrue(result)
 
 

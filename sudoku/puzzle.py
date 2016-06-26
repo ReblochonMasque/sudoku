@@ -49,7 +49,7 @@ class Puzzle(object):
         :return: a Puzzle object, clone of self
         """
         cloned_puzzle =  make_grid_from_string(self.print_puzzle())
-        assert cloned_puzzle.is_valid_grid()
+        assert cloned_puzzle.is_valid()
         cloned_puzzle.parse_grid_candidates()
         return cloned_puzzle
 
@@ -74,7 +74,7 @@ class Puzzle(object):
             self._grid = {key: value for key, value in zip(p_const.SQUARES, chars)}
         return self
 
-    def is_valid_grid(self) -> bool:
+    def is_valid(self) -> bool:
         """
         verifies if a grid is valid
         --> proper size -> all squares have a value assigned                       V
