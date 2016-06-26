@@ -12,7 +12,7 @@ import unittest
 
 from sudoku.puzzle import Puzzle, make_grid_from_string
 
-from sudoku.puzzleconstants import DIGITS, SQUARES
+from sudoku.puzzleconstants import DIGITS, SQUARES, DIGITS
 
 
 class TestPuzzle(unittest.TestCase):
@@ -42,6 +42,48 @@ class TestPuzzle(unittest.TestCase):
                                      'Bh': '123456789', 'Ce': '123456789', 'Ag': '123456789', 'Dc': '123456789',
                                      'Ii': '123456789', 'Ec': '123456789', 'Ca': '123456789', 'Fh': '123456789',
                                      'Be': '123456789'}
+
+        solved_puzzle_string = '437256189569183742812794536673921458985467321241538697124379865798645213356812974'
+        self.solved_puzzle = make_grid_from_string(solved_puzzle_string)
+        self.solved_puzzle.parse_grid_candidates()
+
+    def test_is_solved_solved_puzzle(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        solved = self.solved_puzzle.is_solved()
+        self.assertTrue(solved)
+
+    def test_is_solved_empty_puzzle(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        empty_puzzle_string = '.................................................................................'
+        empty_puzzle = make_grid_from_string(empty_puzzle_string)
+        unsolved = empty_puzzle.is_solved()
+        self.assertFalse(unsolved)
+
+    def test_is_solved_unfinished_puzzle(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        valid_puzzle_string = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        unfinished_puzzle = make_grid_from_string(valid_puzzle_string)
+        unsolved = unfinished_puzzle.is_solved()
+        self.assertFalse(unsolved)
+
+    def test_is_solved_invalid_puzzle(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        invalid_puzzle_string = '4444448.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        unfinished_puzzle = make_grid_from_string(invalid_puzzle_string)
+        unsolved = unfinished_puzzle.is_solved()
+        self.assertFalse(unsolved)
+
+    def test_is_solved_invalid_full_puzzle(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        invalid_full_puzzle_string = '444444444569183742812794536673921458985467321241538697124379865798645213356812974'
+        full_invalid_puzzle = make_grid_from_string(invalid_full_puzzle_string)
+        unsolved = full_invalid_puzzle.is_solved()
+        self.assertFalse(unsolved)
 
     def test_is_valid_grid_0(self):
         """ tests is a valid grid is valid

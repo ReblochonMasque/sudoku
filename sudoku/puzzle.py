@@ -74,6 +74,13 @@ class Puzzle(object):
             self._grid = {key: value for key, value in zip(p_const.SQUARES, chars)}
         return self
 
+    def is_solved(self):
+        """
+        Checks is a puzzle is solved (full and valid)
+        :return: True is the puzzle is solved, False otherwise
+        """
+        return not any([val in '.0' for _, val in self._grid.items()]) and self.is_valid()
+
     def is_valid(self) -> bool:
         """
         verifies if a grid is valid
