@@ -12,7 +12,7 @@ import unittest
 
 from sudoku.puzzle import Puzzle, make_grid_from_string
 
-from sudoku.puzzleconstants import DIGITS, SQUARES, DIGITS
+from sudoku.puzzleconstants import SQUARES, DIGITS
 
 
 class TestPuzzle(unittest.TestCase):
@@ -256,7 +256,37 @@ class TestPuzzle(unittest.TestCase):
         self.assertTrue(all(cloned_puzzle.grid[square] == expected_grid[square] for square in SQUARES))
         self.assertTrue(all(cloned_puzzle.candidates[square] == expected_candidates[square] for square in SQUARES))
 
+    def test_repr_1(self):
+        """tests that the __repr__ returns the proper string
+        """
+        puzzle_string = '.6..7.4..5......12...1....7..5.4.27..3.....4..19.6.8...4...1...79.6....8..1.5..2.'
+        puzzle = make_grid_from_string(puzzle_string)
+        result = repr(puzzle)
+        self.assertEqual(result, puzzle_string)
 
+    def test_repr_2(self):
+        """tests that the __repr__ returns the proper string
+        """
+        puzzle_string = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+        puzzle = make_grid_from_string(puzzle_string)
+        result = repr(puzzle)
+        self.assertEqual(result, puzzle_string)
+
+    def test_repr_3(self):
+        """tests that the __repr__ returns the proper string
+        """
+        puzzle_string = '.................................................................................'
+        puzzle = make_grid_from_string(puzzle_string)
+        result = repr(puzzle)
+        self.assertEqual(result, puzzle_string)
+
+    def test_repr_4(self):
+        """tests that the __repr__ returns the proper string
+        """
+        puzzle_string = '769123485812456937534789216381964752426517893975238641143872569697345128258691374'
+        puzzle = make_grid_from_string(puzzle_string)
+        result = repr(puzzle)
+        self.assertEqual(result, puzzle_string)
 
 
     def test_print_output(self):

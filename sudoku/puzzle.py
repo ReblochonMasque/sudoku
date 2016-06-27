@@ -131,6 +131,12 @@ class Puzzle(object):
         temp = sorted(list(self._grid.keys()))
         return temp == p_const.SQUARES and len(temp) == len(p_const.SQUARES)
 
+    def __repr__(self):
+        """
+        :return: a simple string representation of sa puzzle
+        """
+        return ''.join([self._grid[square] for square in p_const.SQUARES])
+
     def __str__(self):
         result = '   '
         for col, char2 in enumerate('abcdefghi'):
