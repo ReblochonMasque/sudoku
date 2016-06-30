@@ -73,24 +73,24 @@ class PuzzleSolver(object):
                 self._puzzle.grid[result[0]] = p_const.CANDIDATES_TO_VALUE[''.join(res_string)]
                 self._puzzle.candidates[result[0]] = ''.join(res_string)
 
-    # def eliminate_propagate_fill(self):
-    #     """
-    #     Propagates the constraints by successively eliminating, propagating and filling the
-    #     solved squares until all constraints have been propagated. (no more change in the puzzle states)
-    #     ...or the puzzle is solved
-    #     """
-    #     while not self._puzzle.is_solved():
-    #         pre_grid_state = repr(self._puzzle)
-    #         pre_candidates_state = str(self._puzzle)
-    #         self.eliminate_candidates()
-    #         self.propagate()
-    #         self.fill_singles()
-    #         post_grid_state = repr(self._puzzle)
-    #         post_candidates_state = str(self._puzzle)
-    #         if pre_grid_state == post_grid_state and pre_candidates_state == post_candidates_state:
-    #             break
-    #     print(repr(self._puzzle))
-    #
+    def eliminate_propagate_fill(self):
+        """
+        Propagates the constraints by successively eliminating, propagating and filling the
+        solved squares until all constraints have been propagated. (no more change in the puzzle states)
+        ...or the puzzle is solved
+        """
+        while not self._puzzle.is_solved():
+            pre_grid_state = repr(self._puzzle)
+            pre_candidates_state = str(self._puzzle)
+            self.eliminate_candidates()
+            self.propagate()
+            self.fill_singles()
+            post_grid_state = repr(self._puzzle)
+            post_candidates_state = str(self._puzzle)
+            if pre_grid_state == post_grid_state and pre_candidates_state == post_candidates_state:
+                break
+        print(repr(self._puzzle))
+
 
 #
 # def main(argv):
