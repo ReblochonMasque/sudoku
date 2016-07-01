@@ -93,6 +93,16 @@ class PuzzleSolver(object):
         print(repr(self._puzzle))
         return True
 
+    def search(self):
+        """
+        clones the puzzle
+        creates a new solver
+        assigns the next candidate value to the empty square with the less candidates
+        recursively calls solve() on the new puzzle
+        :return: a solved puzzle repr()
+        """
+        pass
+
     def solve(self):
         """
         manages the operations to conduct in order to solve a puzzla
@@ -100,6 +110,7 @@ class PuzzleSolver(object):
         :return: nothing at the moment
         """
         self.eliminate_propagate_fill()
+
         return repr(self._puzzle)
 
 
