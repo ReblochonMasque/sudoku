@@ -83,6 +83,14 @@ class TestPuzzleSolver(unittest.TestCase):
         solver = PuzzleSolver(puzzle_clone)
         self.assertIsInstance(solver, PuzzleSolver)
 
+    def test_is_valid_grid1(self):
+        """
+        tests that the puzzle in PuzzleSolver is valid
+        """
+        result = PuzzleSolver(self.grid_0.clone())._is_valid()
+        self.assertTrue(result)
+
+
 
 
     def test_is_solved_solved_ps3(self):

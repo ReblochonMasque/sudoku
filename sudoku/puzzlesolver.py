@@ -30,6 +30,14 @@ class PuzzleSolver(object):
         """
         return self._puzzle.is_solved()
 
+    def _is_valid(self):
+        """
+        check if the puzzle is valid
+        :return: True if valid, False otherwise
+        """
+        return self._puzzle.is_valid()
+
+
     def eliminate_candidates(self):
         """For each square in the grid that has a single assigned value,
         run through the PEERS and eliminate this value from the candidates
