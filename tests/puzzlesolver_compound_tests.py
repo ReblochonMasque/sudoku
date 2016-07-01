@@ -57,6 +57,29 @@ class TestPuzzleSolver(unittest.TestCase):
 
 
     @staticmethod
+    def _apply_solve(puzzle_string):
+        """
+        :return: a tuple containing
+                 the result of the solve() on the provided string,
+                 and a repr of the "solved" puzzle
+        """
+        grid = make_grid_from_string(puzzle_string)
+        grid.parse_grid_candidates()
+        solver = PuzzleSolver(grid.clone())
+        result = solver.solve()
+        return result
+
+    def test_solve_g3(self):
+        puzzle_string, expected_string = self.g3, self.s3
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+
+
+
+
+
+    @staticmethod
     def _apply_eliminate_propagate_fill(puzzle_string):
         """
         :return: a tuple containing
