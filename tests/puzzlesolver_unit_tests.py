@@ -91,6 +91,24 @@ class TestPuzzleSolver(unittest.TestCase):
         solved = self.ps3._is_solved()
         self.assertTrue(solved)
 
+    def test_is_solved_solved_ps4(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        solved = self.ps4._is_solved()
+        self.assertTrue(solved)
+
+    def test_is_solved_solved_ps5(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        solved = self.ps5._is_solved()
+        self.assertTrue(solved)
+
+    def test_is_solved_solved_psEmpty(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        solved = self.psEmpty._is_solved()
+        self.assertFalse(solved)
+
 
 
 
