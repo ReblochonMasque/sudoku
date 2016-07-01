@@ -69,6 +69,18 @@ class TestPuzzleSolver(unittest.TestCase):
         result = solver.solve()
         return result
 
+    def test_eliminate_propagate_fill_g1(self):
+        puzzle_string, expected_string = self.g1, self.s1
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g2(self):
+        puzzle_string, expected_string = self.g2, self.s2
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
     def test_solve_g3(self):
         puzzle_string, expected_string = self.g3, self.s3
         resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
