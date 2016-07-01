@@ -56,6 +56,28 @@ class TestPuzzleSolver(unittest.TestCase):
         self.s12 = '423796851786135924159842637538219476972684315614573289865421793291367548347958162'
 
 
+    @staticmethod
+    def _apply_eliminate_propagate_fill(puzzle_string):
+        """
+        :return: a tuple containing
+                 the result of eliminate_propagate_fill() on the provided string,
+                 and a repr of the "solved" puzzle
+        """
+        grid = make_grid_from_string(puzzle_string)
+        grid.parse_grid_candidates()
+        solver = PuzzleSolver(grid.clone())
+        result = solver.eliminate_propagate_fill()
+        return result, repr(solver._puzzle)
+
+
+    def test_eliminate_propagate_fill_g3(self):
+        puzzle_string, expected_string = self.g3, self.s3
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
