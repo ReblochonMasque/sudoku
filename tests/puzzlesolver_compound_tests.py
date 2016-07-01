@@ -69,22 +69,13 @@ class TestPuzzleSolver(unittest.TestCase):
         result = solver.solve()
         return result
 
-    def test_eliminate_propagate_fill_g1(self):
-        puzzle_string, expected_string = self.g1, self.s1
-        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
-        self.assertTrue(result)
-        self.assertEqual(expected_string, resulting_string)
-
-    def test_eliminate_propagate_fill_g2(self):
-        puzzle_string, expected_string = self.g2, self.s2
-        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
-        self.assertTrue(result)
-        self.assertEqual(expected_string, resulting_string)
-
     def test_solve_g3(self):
         puzzle_string, expected_string = self.g3, self.s3
         resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
         self.assertEqual(expected_string, resulting_string)
+
+
+
 
 
 
@@ -104,9 +95,74 @@ class TestPuzzleSolver(unittest.TestCase):
         result = solver.eliminate_propagate_fill()
         return result, repr(solver._puzzle)
 
+    def test_eliminate_propagate_fill_g1(self):
+        puzzle_string, expected_string = self.g1, self.s1
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g2(self):
+        puzzle_string, expected_string = self.g2, self.s2
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
 
     def test_eliminate_propagate_fill_g3(self):
         puzzle_string, expected_string = self.g3, self.s3
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g4(self):
+        puzzle_string, expected_string = self.g4, self.s4
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g5(self):
+        puzzle_string, expected_string = self.g5, self.s5
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g6(self):
+        puzzle_string, expected_string = self.g6, self.s6
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g7(self):
+        puzzle_string, expected_string = self.g7, self.s7
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g8(self):
+        puzzle_string, expected_string = self.g8, self.s8
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g9(self):
+        puzzle_string, expected_string = self.g9, self.s9
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g10(self):
+        puzzle_string, expected_string = self.g10, self.s10
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g11(self):
+        puzzle_string, expected_string = self.g11, self.s11
+        result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
+        self.assertTrue(result)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_eliminate_propagate_fill_g12(self):
+        puzzle_string, expected_string = self.g12, self.s12
         result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
         self.assertTrue(result)
         self.assertEqual(expected_string, resulting_string)
