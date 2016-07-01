@@ -56,6 +56,7 @@ class TestPuzzleSolver(unittest.TestCase):
         self.s12 = '423796851786135924159842637538219476972684315614573289865421793291367548347958162'
 
 
+    #-----------------TEST SOLVE--------------------------------------
     @staticmethod
     def _apply_solve(puzzle_string):
         """
@@ -84,14 +85,54 @@ class TestPuzzleSolver(unittest.TestCase):
         resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
         self.assertEqual(expected_string, resulting_string)
 
+    def test_solve_g4(self):
+        puzzle_string, expected_string = self.g4, self.s4
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_solve_g5(self):
+        puzzle_string, expected_string = self.g5, self.s5
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_solve_g6(self):
+        puzzle_string, expected_string = self.g6, self.s6
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_solve_g7(self):
+        puzzle_string, expected_string = self.g7, self.s7
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_solve_g8(self):
+        puzzle_string, expected_string = self.g8, self.s8
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_solve_g9(self):
+        puzzle_string, expected_string = self.g9, self.s9
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_solve_g10(self):
+        puzzle_string, expected_string = self.g10, self.s10
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_solve_g11(self):
+        puzzle_string, expected_string = self.g11, self.s11
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
+
+    def test_solve_g12(self):
+        puzzle_string, expected_string = self.g12, self.s12
+        resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
+        self.assertEqual(expected_string, resulting_string)
 
 
 
-
-
-
-
-
+    #-----------------TEST ELIMINATE_PROPAGATE_FILL-----------------------
     @staticmethod
     def _apply_eliminate_propagate_fill(puzzle_string):
         """
@@ -176,8 +217,6 @@ class TestPuzzleSolver(unittest.TestCase):
         result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
         self.assertTrue(result)
         self.assertEqual(expected_string, resulting_string)
-
-
 
 
 if __name__ == '__main__':
