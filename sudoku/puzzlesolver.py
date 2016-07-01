@@ -100,6 +100,7 @@ class PuzzleSolver(object):
         :return: nothing at the moment
         """
         self.eliminate_propagate_fill()
+        return repr(self._puzzle)
 
 
 
