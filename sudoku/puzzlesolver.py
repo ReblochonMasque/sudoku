@@ -23,6 +23,13 @@ class PuzzleSolver(object):
     def __init__(self, puzzle_clone):
         self._puzzle = puzzle_clone
 
+    def _is_solved(self):
+        """
+        check if the puzzle is solved
+        :return: True if solved, False otherwise
+        """
+        return self._puzzle.is_solved()
+
     def eliminate_candidates(self):
         """For each square in the grid that has a single assigned value,
         run through the PEERS and eliminate this value from the candidates
