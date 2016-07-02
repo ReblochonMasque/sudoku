@@ -104,8 +104,8 @@ class PuzzleSolver(object):
             self.fill_singles()
             post_grid_state, post_candidates_state = repr(self._puzzle), str(self._puzzle)
             if pre_grid_state == post_grid_state and pre_candidates_state == post_candidates_state:
-                break
-        print(repr(self._puzzle))
+                return True
+        # print(repr(self._puzzle))
         return True
 
     def search(self):
@@ -116,7 +116,42 @@ class PuzzleSolver(object):
         recursively calls solve() on the new puzzle
         :return: a solved puzzle repr()
         """
-        pass
+        if self._is_solved():
+            return self
+        else:
+            try:
+                new_solver = PuzzleSolver(self._puzzle.clone())
+            except AssertionError:
+                return False
+
+            next_square = self._get_next_square()
+            candidates = [d for d in self._puzzle.candidates[next_square] if d not in '.0']
+            for candidate in candidates:
+
+                print('next_square =', next_square, 'candidate = ', candidate)
+                new_solver._puzzle.grid[next_square] = candidate
+                print('-----------------------> :', end='')
+                print(repr(new_solver._puzzle))
+
+                return new_solver.solve()
+
+
+    def _get_next_square(self):
+        """
+        Finds the square to explore next:
+            --> not filled
+            --> with the lowest number of candidates
+        :return: the square to explore next
+        """
+        lowest_num_candidates = 10
+        next_square = None
+        for open_square in [square for square in p_const.SQUARES if self._puzzle._grid[square] in '.0']:
+            num_candidates = sum(1 for d in self._puzzle.candidates[open_square] if d in '123456789')
+            if num_candidates == 2:
+                return open_square
+            elif num_candidates < lowest_num_candidates:
+                next_square = open_square
+        return next_square
 
     def solve(self):
         """
@@ -124,15 +159,36 @@ class PuzzleSolver(object):
         :print: the repr of a solved puzzle (as far as could go with constraint propagation)
         :return: nothing at the moment
         """
-        self.eliminate_propagate_fill()
 
+        self.eliminate_propagate_fill()
+        print('eliminate_propagate_fill :', end='')
+        print(repr(self._puzzle))
+        self.search()
+        print('search                   :', end='')
+        print(repr(self._puzzle))
         return repr(self._puzzle)
 
 
 
+def main(argv):
+    # require search
+    g1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+    partial_s1 = '4.....8.5.3..........7......2.....6.....8.4...4..1.......6.3.7.5.32.1...1.4......'
+    s1 = ''
+    solve_puzzle(g1)
 
-# def main(argv):
+    g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
+    partial_s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
+    s2 = ''
+    print()
+
+def solve_puzzle(string):
+    print('original string          :', end='')
+    print(string)
+    solver = PuzzleSolver(make_grid_from_string(string).clone())
+    PuzzleSolver.solve(solver)
+    print(solver._puzzle.print_puzzle())
 
 
-# if __name__ == '__main__':
-#     sys.exit(main(sys.argv))
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
