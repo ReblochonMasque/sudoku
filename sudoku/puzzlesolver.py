@@ -117,7 +117,7 @@ class PuzzleSolver(object):
         """
         while not self._puzzle.is_solved():
             pre_grid_state, pre_candidates_state = repr(self._puzzle), str(self._puzzle)
-            if not self.eliminate_candidates():
+            if not self.eliminate_candidates() or not self._is_valid():
                 return False
             self.propagate()
             self.fill_singles()
@@ -140,19 +140,19 @@ class PuzzleSolver(object):
             return self
 
         new_solver = PuzzleSolver(self._puzzle.clone())
-        new_solver.eliminate_propagate_fill()
-        next_square = new_solver._get_next_square()
-        if next_square is None:
-            print(new_solver)
-            return
-        candidates = [d for d in new_solver._puzzle.candidates[next_square] if d not in '.0']
+        if new_solver.eliminate_propagate_fill():
+            next_square = new_solver._get_next_square()
+            if next_square is None:
+                print(new_solver)
+                return
+            candidates = [d for d in new_solver._puzzle.candidates[next_square] if d not in '.0']
 
-        for candidate in candidates:
-            print('next_square =', next_square, 'candidate =', candidate, ' - ', new_solver)
-            new_solver._puzzle.grid[next_square] = candidate
-            if new_solver.eliminate_propagate_fill():
-                break
-        return new_solver.search()
+            for candidate in candidates:
+                print('next_square =', next_square, 'candidate =', candidate, ' - ', new_solver)
+                new_solver._puzzle.grid[next_square] = candidate
+                if new_solver.eliminate_propagate_fill():
+                    break
+            return new_solver.search()
 
 
 
@@ -172,24 +172,25 @@ class PuzzleSolver(object):
 
 def main(argv):
 
-    # # require search
-    # g1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-    # partial_s1 = '4.....8.5.3..........7......2.....6.....8.4...4..1.......6.3.7.5.32.1...1.4......'
-    # s1 = ''
-    # solve_puzzle(g1)
+    # require search
+    g1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+    partial_s1 = '4.....8.5.3..........7......2.....6.....8.4...4..1.......6.3.7.5.32.1...1.4......'
+    s1 = ''
+    solve_puzzle(g1)
+    print()
 
-    # # require search
-    # g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
-    # partial_s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
-    # s2 = ''
-    # solve_puzzle(g2)
-    # print()
+    # require search
+    g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
+    partial_s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
+    s2 = ''
+    solve_puzzle(g2)
+    print()
 
-    # #
-    # g3 = '58261..9.3..79528117928..6....4389..9..126..8..89571..25..61.79.9..72..3....496.2'
-    # s3 = '582614397346795281179283564761438925935126748428957136253861479694572813817349652'
-    # solve_puzzle(g3)
-    # print()
+    #
+    g3 = '58261..9.3..79528117928..6....4389..9..126..8..89571..25..61.79.9..72..3....496.2'
+    s3 = '582614397346795281179283564761438925935126748428957136253861479694572813817349652'
+    solve_puzzle(g3)
+    print()
 
 def solve_puzzle(string):
     print('original string                 - ', string)
