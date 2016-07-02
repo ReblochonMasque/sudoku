@@ -37,7 +37,6 @@ class PuzzleSolver(object):
         """
         return self._puzzle.is_valid()
 
-
     def eliminate_candidates(self):
         """For each square in the grid that has a single assigned value,
         run through the PEERS and eliminate this value from the candidates
@@ -133,24 +132,25 @@ class PuzzleSolver(object):
         recursively calls solve() on the new puzzle
         :return: a solved puzzle repr()
         """
+
         if self._is_solved():
-            return self
-        else:
+            return
+
+        next_square = self._get_next_square()
+        candidates = [d for d in self._puzzle.candidates[next_square] if d not in '.0']
+
+        for candidate in candidates:
             try:
                 new_solver = PuzzleSolver(self._puzzle.clone())
             except AssertionError:
                 return False
 
-            next_square = self._get_next_square()
-            candidates = [d for d in self._puzzle.candidates[next_square] if d not in '.0']
-            for candidate in candidates:
+            print('next_square =', next_square, 'candidate = ', candidate)
+            new_solver._puzzle.grid[next_square] = candidate
+            print('-----------------------> :', end='')
+            print(new_solver)
 
-                print('next_square =', next_square, 'candidate = ', candidate)
-                new_solver._puzzle.grid[next_square] = candidate
-                print('-----------------------> :', end='')
-                print(repr(new_solver._puzzle))
-
-                return new_solver.solve()
+            return new_solver.solve()
 
 
     def solve(self):
@@ -188,7 +188,7 @@ def main(argv):
     #
     g3 = '58261..9.3..79528117928..6....4389..9..126..8..89571..25..61.79.9..72..3....496.2'
     s3 = '582614397346795281179283564761438925935126748428957136253861479694572813817349652'
-    solve_puzzle(s3)
+    solve_puzzle(g3)
     print()
 
 def solve_puzzle(string):
