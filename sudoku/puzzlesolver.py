@@ -163,7 +163,6 @@ class PuzzleSolver(object):
             if new_solver.eliminate_propagate_fill():
                 break
         return new_solver
-        # return new_solver
 
 
     def solve(self):
@@ -172,21 +171,25 @@ class PuzzleSolver(object):
         :print: the repr of a solved puzzle (as far as could go with constraint propagation)
         :return: nothing at the moment
         """
+        if self._is_solved():
+            return self
 
         if not self.eliminate_propagate_fill():
+            print('eliminate_propagate_fill :', end='')
+            print(repr(self._puzzle))
             self.search()
-        print('eliminate_propagate_fill :', end='')
-        print(repr(self._puzzle))
 
         new_solver = self.search()
-        print('search                   :', end='')
-        print(new_solver)
-        # return repr(self._puzzle)
-        return new_solver.solve()
-        # if not new_solver._is_solved():
-        #     print('##################################################################')
-        #     return new_solver.solve()
 
+        if new_solver is True:
+            return str(self)
+        elif new_solver is False:
+            self.solve()
+        else:
+            print('search                   :', end='')
+            print(new_solver)
+            # return repr(self._puzzle)
+            return new_solver.solve()
 
 
 
@@ -215,8 +218,8 @@ def solve_puzzle(string):
     print('original string          :', end='')
     print(string)
     solver = PuzzleSolver(make_grid_from_string(string).clone())
-    PuzzleSolver.solve(solver)
-    print(solver._puzzle.print_puzzle())
+    result = PuzzleSolver.solve(solver)
+    print(result._puzzle.print_puzzle())
 
 
 if __name__ == '__main__':
