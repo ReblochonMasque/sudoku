@@ -40,6 +40,12 @@ class PuzzleSolver(object):
         """
         return self._puzzle.is_valid()
 
+    def _clone(self):
+        """returns a clone of self"""
+        result = PuzzleSolver(self._puzzle.clone())
+        result.eliminate_propagate_fill()
+        return result
+
     def eliminate_candidates(self):
         """For each square in the grid that has a single assigned value,
         run through the PEERS and eliminate this value from the candidates
@@ -140,6 +146,7 @@ class PuzzleSolver(object):
             return self
 
         new_solver = PuzzleSolver(self._puzzle.clone())
+        # new_solver = self._clone()
         if new_solver.eliminate_propagate_fill():
             next_square = new_solver._get_next_square()
             if next_square is None:
