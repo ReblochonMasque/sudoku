@@ -124,7 +124,6 @@ class PuzzleSolver(object):
             post_grid_state, post_candidates_state = repr(self._puzzle), str(self._puzzle)
             if pre_grid_state == post_grid_state and pre_candidates_state == post_candidates_state:
                 return True
-        # print(repr(self._puzzle))
         return True
 
     def search(self):
@@ -137,32 +136,24 @@ class PuzzleSolver(object):
         """
         if not self._is_valid():
             return False
-
         if self._is_solved():
-            return True
-
-        next_square = self._get_next_square()
-        assert next_square is not None
-
-        candidates = [d for d in self._puzzle.candidates[next_square] if d not in '.0']
+            return self
 
         new_solver = PuzzleSolver(self._puzzle.clone())
         new_solver.eliminate_propagate_fill()
+        next_square = new_solver._get_next_square()
+        if next_square is None:
+            print(new_solver)
+            return
+        candidates = [d for d in new_solver._puzzle.candidates[next_square] if d not in '.0']
 
         for candidate in candidates:
-            # try:
-            #     new_solver = PuzzleSolver(self._puzzle.clone())
-            #     new_solver.eliminate_propagate_fill()
-            # except AssertionError:
-            #     return self
-
-            print('next_square =', next_square, 'candidate = ', candidate)
+            print('next_square =', next_square, 'candidate =', candidate, ' - ', new_solver)
             new_solver._puzzle.grid[next_square] = candidate
-            print('-----------------------> :', end='')
-            print(new_solver)
             if new_solver.eliminate_propagate_fill():
                 break
-        return new_solver
+        return new_solver.search()
+
 
 
     def solve(self):
@@ -171,27 +162,13 @@ class PuzzleSolver(object):
         :print: the repr of a solved puzzle (as far as could go with constraint propagation)
         :return: nothing at the moment
         """
+        result = False
         if self._is_solved():
             return self
-
-        if not self.eliminate_propagate_fill():
-            print('eliminate_propagate_fill :', end='')
-            print(repr(self._puzzle))
-            self.search()
-
-        new_solver = self.search()
-
-        if new_solver is True:
-            return str(self)
-        elif new_solver is False:
-            self.solve()
-        else:
-            print('search                   :', end='')
-            print(new_solver)
-            # return repr(self._puzzle)
-            return new_solver.solve()
-
-
+        if self._is_valid():
+            self.eliminate_propagate_fill()
+            result = self.search()
+        return result
 
 def main(argv):
 
@@ -208,18 +185,17 @@ def main(argv):
     # solve_puzzle(g2)
     # print()
 
-    #
-    g3 = '58261..9.3..79528117928..6....4389..9..126..8..89571..25..61.79.9..72..3....496.2'
-    s3 = '582614397346795281179283564761438925935126748428957136253861479694572813817349652'
-    solve_puzzle(g3)
-    print()
+    # #
+    # g3 = '58261..9.3..79528117928..6....4389..9..126..8..89571..25..61.79.9..72..3....496.2'
+    # s3 = '582614397346795281179283564761438925935126748428957136253861479694572813817349652'
+    # solve_puzzle(g3)
+    # print()
 
 def solve_puzzle(string):
-    print('original string          :', end='')
-    print(string)
+    print('original string                 - ', string)
     solver = PuzzleSolver(make_grid_from_string(string).clone())
-    result = PuzzleSolver.solve(solver)
-    print(result._puzzle.print_puzzle())
+    result = solver.solve()
+    print(result)
 
 
 if __name__ == '__main__':
