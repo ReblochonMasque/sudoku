@@ -146,19 +146,19 @@ class PuzzleSolver(object):
             return self
 
         new_solver = self._clone()
-        if new_solver.eliminate_propagate_fill():
-            next_square = new_solver._get_next_square()
-            if next_square is None:
-                print(new_solver)
-                return
-            candidates = [d for d in new_solver._puzzle.candidates[next_square] if d not in '.0']
 
-            for candidate in candidates:
-                print('next_square =', next_square, 'candidate =', candidate, ' - ', new_solver)
-                new_solver._puzzle.grid[next_square] = candidate
-                if new_solver.eliminate_propagate_fill():
-                    break
-            return new_solver.search()
+        next_square = new_solver._get_next_square()
+        if next_square is None:
+            print(new_solver)
+            return
+        candidates = [d for d in new_solver._puzzle.candidates[next_square] if d not in '.0']
+
+        for candidate in candidates:
+            print('next_square =', next_square, 'candidate =', candidate, ' - ', new_solver)
+            new_solver._puzzle.grid[next_square] = candidate
+            if new_solver.eliminate_propagate_fill():
+                break
+        return new_solver.search()
 
 
 
