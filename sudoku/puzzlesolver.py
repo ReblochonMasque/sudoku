@@ -156,11 +156,7 @@ class PuzzleSolver(object):
         for candidate in candidates:
             print('next_square =', next_square, 'candidate =', candidate, ' - ', new_solver)
             new_solver._puzzle.grid[next_square] = candidate
-            if new_solver.eliminate_propagate_fill():
-                break
-        return new_solver.search()
-
-
+            return new_solver.search()
 
     def solve(self):
         """
