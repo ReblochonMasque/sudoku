@@ -145,8 +145,7 @@ class PuzzleSolver(object):
         if self._is_solved():
             return self
 
-        new_solver = PuzzleSolver(self._puzzle.clone())
-        # new_solver = self._clone()
+        new_solver = self._clone()
         if new_solver.eliminate_propagate_fill():
             next_square = new_solver._get_next_square()
             if next_square is None:
