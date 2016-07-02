@@ -23,6 +23,9 @@ class PuzzleSolver(object):
     def __init__(self, puzzle_clone):
         self._puzzle = puzzle_clone
 
+    def __str__(self):
+        return repr(self._puzzle)
+
     def _is_solved(self):
         """
         check if the puzzle is solved
