@@ -135,25 +135,35 @@ class PuzzleSolver(object):
         recursively calls solve() on the new puzzle
         :return: a solved puzzle repr()
         """
+        if not self._is_valid():
+            return False
 
         if self._is_solved():
-            return
+            return True
 
         next_square = self._get_next_square()
+        assert next_square is not None
+
         candidates = [d for d in self._puzzle.candidates[next_square] if d not in '.0']
 
+        new_solver = PuzzleSolver(self._puzzle.clone())
+        new_solver.eliminate_propagate_fill()
+
         for candidate in candidates:
-            try:
-                new_solver = PuzzleSolver(self._puzzle.clone())
-            except AssertionError:
-                return False
+            # try:
+            #     new_solver = PuzzleSolver(self._puzzle.clone())
+            #     new_solver.eliminate_propagate_fill()
+            # except AssertionError:
+            #     return self
 
             print('next_square =', next_square, 'candidate = ', candidate)
             new_solver._puzzle.grid[next_square] = candidate
             print('-----------------------> :', end='')
             print(new_solver)
-
-            return new_solver.solve()
+            if new_solver.eliminate_propagate_fill():
+                break
+        return new_solver
+        # return new_solver
 
 
     def solve(self):
@@ -163,13 +173,20 @@ class PuzzleSolver(object):
         :return: nothing at the moment
         """
 
-        self.eliminate_propagate_fill()
+        if not self.eliminate_propagate_fill():
+            self.search()
         print('eliminate_propagate_fill :', end='')
         print(repr(self._puzzle))
-        self.search()
+
+        new_solver = self.search()
         print('search                   :', end='')
-        print(repr(self._puzzle))
-        return repr(self._puzzle)
+        print(new_solver)
+        # return repr(self._puzzle)
+        return new_solver.solve()
+        # if not new_solver._is_solved():
+        #     print('##################################################################')
+        #     return new_solver.solve()
+
 
 
 
