@@ -88,6 +88,23 @@ class PuzzleSolver(object):
                 self._puzzle.grid[result[0]] = p_const.CANDIDATES_TO_VALUE[''.join(res_string)]
                 self._puzzle.candidates[result[0]] = ''.join(res_string)
 
+    def _get_next_square(self):
+        """
+        Finds the square to explore next:
+            --> not filled
+            --> with the lowest number of candidates
+        :return: the square to explore next
+        """
+        lowest_num_candidates = 10
+        next_square = None
+        for open_square in [square for square in p_const.SQUARES if self._puzzle._grid[square] in '.0']:
+            num_candidates = sum(1 for d in self._puzzle.candidates[open_square] if d in '123456789')
+            if num_candidates == 2:
+                return open_square
+            elif num_candidates < lowest_num_candidates:
+                next_square = open_square
+        return next_square
+
     def eliminate_propagate_fill(self):
         """
         Propagates the constraints by successively eliminating, propagating and filling the
@@ -136,23 +153,6 @@ class PuzzleSolver(object):
                 return new_solver.solve()
 
 
-    def _get_next_square(self):
-        """
-        Finds the square to explore next:
-            --> not filled
-            --> with the lowest number of candidates
-        :return: the square to explore next
-        """
-        lowest_num_candidates = 10
-        next_square = None
-        for open_square in [square for square in p_const.SQUARES if self._puzzle._grid[square] in '.0']:
-            num_candidates = sum(1 for d in self._puzzle.candidates[open_square] if d in '123456789')
-            if num_candidates == 2:
-                return open_square
-            elif num_candidates < lowest_num_candidates:
-                next_square = open_square
-        return next_square
-
     def solve(self):
         """
         manages the operations to conduct in order to solve a puzzla
@@ -171,15 +171,24 @@ class PuzzleSolver(object):
 
 
 def main(argv):
-    # require search
-    g1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-    partial_s1 = '4.....8.5.3..........7......2.....6.....8.4...4..1.......6.3.7.5.32.1...1.4......'
-    s1 = ''
-    solve_puzzle(g1)
 
-    g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
-    partial_s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
-    s2 = ''
+    # # require search
+    # g1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+    # partial_s1 = '4.....8.5.3..........7......2.....6.....8.4...4..1.......6.3.7.5.32.1...1.4......'
+    # s1 = ''
+    # solve_puzzle(g1)
+
+    # # require search
+    # g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
+    # partial_s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
+    # s2 = ''
+    # solve_puzzle(g2)
+    # print()
+
+    #
+    g3 = '58261..9.3..79528117928..6....4389..9..126..8..89571..25..61.79.9..72..3....496.2'
+    s3 = ''
+    solve_puzzle(g3)
     print()
 
 def solve_puzzle(string):
