@@ -134,23 +134,21 @@ class PuzzleSolver(object):
 
     def search(self):
         """
-        clones the puzzle
-        creates a new solver
+        creates a new clone solver
         assigns the next candidate value to the empty square with the less candidates
         recursively calls solve() on the new puzzle
-        :return: a solved puzzle repr()
         """
         if not self._is_valid():
-            return False
+            return 'stuck there'
         if self._is_solved():
-            return self
+            return str(self)
 
         new_solver = self._clone()
 
         next_square = new_solver._get_next_square()
         if next_square is None:
-            print(new_solver)
-            return
+            # print(new_solver)
+            return str(new_solver)
         candidates = [d for d in new_solver._puzzle.candidates[next_square] if d not in '.0']
 
         for candidate in candidates:
@@ -158,19 +156,18 @@ class PuzzleSolver(object):
             new_solver._puzzle.grid[next_square] = candidate
             return new_solver.search()
 
+
     def solve(self):
         """
         manages the operations to conduct in order to solve a puzzla
         :print: the repr of a solved puzzle (as far as could go with constraint propagation)
         :return: nothing at the moment
         """
-        result = False
         if self._is_solved():
             return self
-        if self._is_valid():
-            self.eliminate_propagate_fill()
-            result = self.search()
-        return result
+        if self.eliminate_propagate_fill():
+            # self.eliminate_propagate_fill()
+            return self.search()
 
 def main(argv):
 
@@ -198,7 +195,7 @@ def solve_puzzle(string):
     print('original string                 - ', string)
     solver = PuzzleSolver(make_grid_from_string(string).clone())
     result = solver.solve()
-    print(result)
+    print('Solution                        - ', result)
 
 
 if __name__ == '__main__':
