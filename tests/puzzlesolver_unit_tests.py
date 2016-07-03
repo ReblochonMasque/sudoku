@@ -45,6 +45,35 @@ class TestPuzzleSolver(unittest.TestCase):
         self.grid_4 = make_grid_from_string(grid_string_4)
         self.grid_4.parse_grid_candidates()
 
+        # Not so hard - no search needed
+        self.g3 = '003020600900305001001806400008102900700000008006708200002609500800203009005010300'
+        self.s3 = '483921657967345821251876493548132976729564138136798245372689514814253769695417382'
+        self.ps3 = self._make_and_solve_puzzle(self.s3)
+
+        self.g4 = '.82...59....8.1..3..52...78...37842...........27945...91...68..2..7.9....73...95.'
+        self.s4 = '382467591796851243145293678561378429439612785827945316914526837258739164673184952'
+        self.ps4 = self._make_and_solve_puzzle(self.s4)
+
+
+        self.g5 = '437...189.6.183.......9.536.73..1...9..4.7..1...5..69.124.7.......645.1.356...974'
+        self.s5 = '437256189569183742812794536673921458985467321241538697124379865798645213356812974'
+        self.ps5 = self._make_and_solve_puzzle(self.s5)
+
+        self.gEmpty = '.................................................................................'
+        self.sEmpty = '.................................................................................'
+        self.psEmpty = self._make_and_solve_puzzle(self.sEmpty)
+
+    def _make_and_solve_puzzle(self, puzzle_string):
+        """
+        takes a string makes a puzzle, and clones it
+        :return: PuzzleSolver from that cloned puzzle
+        """
+        puzzle = make_grid_from_string(puzzle_string)
+        puzzle_clone = puzzle.clone()
+        puzzle_solver = PuzzleSolver(puzzle_clone)
+        puzzle_solver.solve()
+        return puzzle_solver
+
     def test_PuzzleSolver_object(self):
         """tests if a PuzzleSolver object is created
         """
@@ -53,6 +82,62 @@ class TestPuzzleSolver(unittest.TestCase):
         puzzle_clone = puzzle.clone()
         solver = PuzzleSolver(puzzle_clone)
         self.assertIsInstance(solver, PuzzleSolver)
+
+
+    def test_is_valid_grid_0(self):
+        """
+        tests that the puzzle in PuzzleSolver is valid
+        """
+        result = PuzzleSolver(self.grid_0.clone())._is_valid()
+        self.assertTrue(result)
+
+    def test_is_valid_grid_1(self):
+        """
+        tests that the puzzle in PuzzleSolver is valid
+        """
+        result = PuzzleSolver(self.grid_1.clone())._is_valid()
+        self.assertTrue(result)
+
+    def test_is_valid_grid_2(self):
+        """
+        tests that the puzzle in PuzzleSolver is valid
+        """
+        result = PuzzleSolver(self.grid_2.clone())._is_valid()
+        self.assertTrue(result)
+
+    def test_is_valid_grid_3(self):
+        """
+        tests that the puzzle in PuzzleSolver is valid
+        """
+        result = PuzzleSolver(self.grid_3.clone())._is_valid()
+        self.assertTrue(result)
+
+
+    def test_is_solved_solved_ps3(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        solved = self.ps3._is_solved()
+        self.assertTrue(solved)
+
+    def test_is_solved_solved_ps4(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        solved = self.ps4._is_solved()
+        self.assertTrue(solved)
+
+    def test_is_solved_solved_ps5(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        solved = self.ps5._is_solved()
+        self.assertTrue(solved)
+
+    def test_is_solved_solved_psEmpty(self):
+        """tests that calling is_solved() on a solved puzzle returns True
+        """
+        solved = self.psEmpty._is_solved()
+        self.assertFalse(solved)
+
+
 
 
     def test_fill_singles_empty(self):

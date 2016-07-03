@@ -18,10 +18,12 @@ class TestPuzzleSolver(unittest.TestCase):
 
         # Very Hard --> require search
         self.g1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
-        self.s1 = '4.....8.5.3..........7......2.....6.....8.4...4..1.......6.3.7.5.32.1...1.4......'
+        self.partial_s1 = '4.....8.5.3..........7......2.....6.....8.4...4..1.......6.3.7.5.32.1...1.4......'
+        self.s1 = '417369825632158947958724316825437169791586432346912758289643571573291684164875293'
 
         self.g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
-        self.s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
+        self.partial_s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
+        self.s2 = '172389564543627819896514237254938176937165428681742395315496782468271953729853641'
 
         # Not so hard - no search needed
         self.g3 = '003020600900305001001806400008102900700000008006708200002609500800203009005010300'
@@ -70,6 +72,7 @@ class TestPuzzleSolver(unittest.TestCase):
         result = solver.solve()
         return result
 
+######################################################
     def test_solve_g1(self):
         puzzle_string, expected_string = self.g1, self.s1
         resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
@@ -79,6 +82,8 @@ class TestPuzzleSolver(unittest.TestCase):
         puzzle_string, expected_string = self.g2, self.s2
         resulting_string = TestPuzzleSolver._apply_solve(puzzle_string)
         self.assertEqual(expected_string, resulting_string)
+
+######################################################
 
     def test_solve_g3(self):
         puzzle_string, expected_string = self.g3, self.s3
@@ -147,13 +152,13 @@ class TestPuzzleSolver(unittest.TestCase):
         return result, repr(solver._puzzle)
 
     def test_eliminate_propagate_fill_g1(self):
-        puzzle_string, expected_string = self.g1, self.s1
+        puzzle_string, expected_string = self.g1, self.partial_s1
         result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
         self.assertTrue(result)
         self.assertEqual(expected_string, resulting_string)
 
     def test_eliminate_propagate_fill_g2(self):
-        puzzle_string, expected_string = self.g2, self.s2
+        puzzle_string, expected_string = self.g2, self.partial_s2
         result, resulting_string = TestPuzzleSolver._apply_eliminate_propagate_fill(puzzle_string)
         self.assertTrue(result)
         self.assertEqual(expected_string, resulting_string)
