@@ -160,8 +160,7 @@ class PuzzleSolver(object):
     def solve(self):
         """
         manages the operations to conduct in order to solve a puzzla
-        :print: the repr of a solved puzzle (as far as could go with constraint propagation)
-        :return: nothing at the moment
+        :return: a solved solver object or an error message
         """
         if self._is_solved():
             return self
