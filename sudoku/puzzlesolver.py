@@ -176,17 +176,7 @@ def main(argv):
     g1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
     partial_s1 = '4.....8.5.3..........7......2.....6.....8.4...4..1.......6.3.7.5.32.1...1.4......'
     s1 = '417369825632158947958724316825437169791586432346912758289643571573291684164875293'
-    p_g1 = make_grid_from_string(g1)
-    print('\nstarting puzzle :')
-    print(p_g1.print_puzzle())
-    p_s1 = make_grid_from_string(s1)
-    print('expected solution :')
-    print(p_s1.print_puzzle())
-    result = solve_puzzle(g1, s1)
-    print('\nobtained solution :')
-    print(result.print_puzzle())
-
-    print()
+    solve_puzzle(g1, s1)
 
     # # require search
     # g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
@@ -225,12 +215,26 @@ def main(argv):
     # solve_puzzle(g4)
     # print()
 
-def solve_puzzle(provided_string, expected_string):
+def solve_puzzle(provided_string, expected_solved_string):
+
+    provided_puzzle = make_grid_from_string(provided_string)
+    expected_puzzle = make_grid_from_string(expected_solved_string)
+    solver = PuzzleSolver(provided_puzzle.clone())
+    res = solver.solve()
+    result = make_grid_from_string(res)
+
+    print()
     print('original string                 - ', provided_string)
-    solver = PuzzleSolver(make_grid_from_string(provided_string).clone())
-    result = solver.solve()
-    print('Solution                        - ', result)
-    return make_grid_from_string(result)
+    print('Solution                        - ', repr(result))
+
+    print('\nstarting puzzle :')
+    print(provided_puzzle.print_puzzle())
+    print('expected solution :')
+    print(expected_puzzle.print_puzzle())
+
+    print('\nobtained solution :')
+    print(result.print_puzzle())
+
 
 
 if __name__ == '__main__':
