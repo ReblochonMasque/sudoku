@@ -222,6 +222,7 @@ def solve_puzzle(name, provided_string, expected_solved_string):
         result = make_grid_from_string('.' * 81)
 
     print('Solution                        - ', repr(result))
+    print('Exit search/solve with          - ', res)
 
     print('\nstarting puzzle :')
     print(provided_puzzle.print_puzzle())
