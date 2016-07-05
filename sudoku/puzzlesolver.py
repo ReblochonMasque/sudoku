@@ -178,53 +178,50 @@ def main(argv):
     s1 = '417369825632158947958724316825437169791586432346912758289643571573291684164875293'
     solve_puzzle(g1, s1)
 
-    # # require search
-    # g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
-    # partial_s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
-    # s2 = '172389564543627819896514237254938176937165428681742395315496782468271953729853641'
-    # p_g3 = make_grid_from_string(s3)
-    # print(p_g3.print_puzzle())
-    # solve_puzzle(g3)
-    # print()
-    #
-    # # exits with "stuck there"
-    # g3 = '58261..9.3..79528117928..6....4389..9..126..8..89571..25..61.79.9..72..3....496.2'
-    # s3 = '582614397346795281179283564761438925935126748428957136253861479694572813817349652'
-    # p_g3 = make_grid_from_string(s3)
-    # print(p_g3.print_puzzle())
-    # solve_puzzle(g3)
-    # print()
-    #
-    # # Expert level
-    # # Exits with "stuck there"
-    # g5 = '5.9........6.......1.85...3...7....8..51...4.3...4.7..9.1......7.4.1639.........4'
-    # # g5 = '5.9........6.......1.85...3...7.9..8..51...4.3...4.7..9.1......7.4.1639.........4'
-    # s5 = '539674821826391475417852963142769538675138249398245716951423687784516392263987154'
-    # p_g5 = make_grid_from_string(s5)
-    # print(p_g5.print_puzzle())
-    # solve_puzzle(g5)
-    # print()
-    #
-    # # exits with key error
-    # # self._puzzle.grid[result[0]] = p_const.CANDIDATES_TO_VALUE[''.join(res_string)]
-    # # KeyError: '..3.5....'
-    # g4 = '2.....38..........1.3..4.575.73.281.......236....8..........1....28......6...7.4.'
-    # s4 = '294756381675138492183294657547362819918475236326981574759643128432819765861527943'
-    # p_g4 = make_grid_from_string(g4)
-    # print(p_g4.print_puzzle())
-    # solve_puzzle(g4)
-    # print()
+    # require search
+    g2 = '1...895..5....7819........72.4..8.7.9.71.54.8.8.7..3.531.4..78.4682....3..985...1'
+    partial_s2 = '172.895.454..2781989.5142.7254938176937165428681742395315496782468271953729853641'
+    s2 = '172389564543627819896514237254938176937165428681742395315496782468271953729853641'
+    solve_puzzle(g2, s2)
+    print()
+
+    # exits with "stuck there"
+    g3 = '58261..9.3..79528117928..6....4389..9..126..8..89571..25..61.79.9..72..3....496.2'
+    s3 = '582614397346795281179283564761438925935126748428957136253861479694572813817349652'
+    solve_puzzle(g3, s3)
+    print()
+
+    # Expert level
+    # Exits with "stuck there"
+    g5 = '5.9........6.......1.85...3...7....8..51...4.3...4.7..9.1......7.4.1639.........4'
+    # g5 = '5.9........6.......1.85...3...7.9..8..51...4.3...4.7..9.1......7.4.1639.........4'
+    s5 = '539674821826391475417852963142769538675138249398245716951423687784516392263987154'
+    solve_puzzle(g5, s5)
+    print()
+
+    # exits with key error
+    # self._puzzle.grid[result[0]] = p_const.CANDIDATES_TO_VALUE[''.join(res_string)]
+    # KeyError: '..3.5....'
+    g4 = '2.....38..........1.3..4.575.73.281.......236....8..........1....28......6...7.4.'
+    s4 = '294756381675138492183294657547362819918475236326981574759643128432819765861527943'
+    solve_puzzle(g4, s4)
+    print()
 
 def solve_puzzle(provided_string, expected_solved_string):
+
+
+    print()
+    print('original string                 - ', provided_string)
 
     provided_puzzle = make_grid_from_string(provided_string)
     expected_puzzle = make_grid_from_string(expected_solved_string)
     solver = PuzzleSolver(provided_puzzle.clone())
     res = solver.solve()
-    result = make_grid_from_string(res)
+    if len(res) == 81:
+        result = make_grid_from_string(res)
+    else:
+        result = make_grid_from_string('.' * 81)
 
-    print()
-    print('original string                 - ', provided_string)
     print('Solution                        - ', repr(result))
 
     print('\nstarting puzzle :')
@@ -232,8 +229,9 @@ def solve_puzzle(provided_string, expected_solved_string):
     print('expected solution :')
     print(expected_puzzle.print_puzzle())
 
-    print('\nobtained solution :')
+    print('obtained solution :')
     print(result.print_puzzle())
+    print('\n\n#----N-E-X-T---T-E-S-T------------------------------------------------#')
 
 
 
