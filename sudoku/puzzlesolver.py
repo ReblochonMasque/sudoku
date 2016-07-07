@@ -56,7 +56,7 @@ class PuzzleSolver(object):
         for square in p_const.SQUARES:
             current_value = self._puzzle.grid[square]
             if current_value not in '.0':
-                # this says is there is an inconsistency
+                # this says if there is an inconsistency
                 # that means it must return False to signal it
                 if self._puzzle.candidates[square] != p_const.VALUE_TO_CANDIDATES[current_value]:
                     return False
