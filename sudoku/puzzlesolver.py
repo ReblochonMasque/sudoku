@@ -224,12 +224,12 @@ def solve_puzzle(name, provided_string, expected_solved_string):
     print('Exit search/solve with          - ', res)
 
     print('\nstarting puzzle :')
-    print(provided_puzzle.print_puzzle())
+    print(provided_puzzle.get_puzzle_str())
     print('expected solution :')
-    print(expected_puzzle.print_puzzle())
+    print(expected_puzzle.get_puzzle_str())
 
     print('obtained solution :')
-    print(result.print_puzzle())
+    print(result.get_puzzle_str())
 
 
 
