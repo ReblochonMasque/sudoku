@@ -85,16 +85,16 @@ class PuzzleSolver(object):
         """
         for unit in p_const.UNIT_LISTS:
             result = []
-            res_string = [str(_) for _ in range(1, 10)]
+            result_string_builder = [str(_) for _ in range(1, 10)]
             for square in unit:
                 val = self._puzzle.grid[square]
                 if val in '.0':
                     result.append(square)
                 else:
-                    res_string[int(val) - 1] = '.'
+                    result_string_builder[int(val) - 1] = '.'
             if len(result) == 1:
-                self._puzzle.grid[result[0]] = p_const.CANDIDATES_TO_VALUE[''.join(res_string)]
-                self._puzzle.candidates[result[0]] = ''.join(res_string)
+                self._puzzle.grid[result[0]] = p_const.CANDIDATES_TO_VALUE[''.join(result_string_builder)]
+                self._puzzle.candidates[result[0]] = ''.join(result_string_builder)
 
     def _get_next_square(self):
         """
