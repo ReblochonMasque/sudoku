@@ -162,12 +162,14 @@ class PuzzleSolver(object):
         manages the operations to conduct in order to solve a puzzla
         :return: a solved solver object or an error message
         """
-        if self._is_solved():
-            return self
-        if self.eliminate_propagate_fill():
-            # self.eliminate_propagate_fill()
-            return self.search()
-        self.solve()
+        self.eliminate_propagate_fill()
+        return str(self)
+        # if self._is_solved():
+        #     return self
+        # if self.eliminate_propagate_fill():
+        #     # self.eliminate_propagate_fill()
+        #     return self.search()
+        # self.solve()
 
 # def main(argv):
 #
